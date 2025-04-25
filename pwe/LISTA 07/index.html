@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de formulários</title>
+</head>
+<body>
+    <h1><b>Cadastro de clientes</b></h1>
+    <p style="color: red;"> Todos os campos são de preenchimento obrigatório</p>
+    <form>
+    <fieldset style="width: 250px;">
+        <legend>Dados pessoais</legend>
+        
+            <label for="name">Nome</label><br>
+            <input id="name" type="text" maxlength="20" required> <br><br>
+            <label for="date">Data de Nascimento</label>
+            <input id="date" type="date" required><br><br>
+            Sexo: 
+            <input type="radio" name="sexo" id="textMasc" required> 
+            <label for="textMasc">Masculino</label>
+            <input type="radio" name="sexo" id="textFem" required>
+            <label for="textFem">Feminino</label><br>    
+    
+        
+    </fieldset>
+    
+    <br>
+    
+    <fieldset style="width: 250px;">
+        <legend>Informações de Contato</legend>
+        
+            <label for="email">Email</label><br>
+            <input id="email" type="text" required><br><br>
+            <label for="tel">Telefone celular</label>
+            <input id="tel" type="text" maxlength="9" placeholder="Apenas numéricos (max: 9)" required><br><br>   
+            <label for="web">Web site pessoal/profissional: </label><br>
+            <input id="web" type="text" required><br>    
+        
+     </fieldset>
+     
+     <br>
+
+     <fieldset style="width: 250px;">
+        <legend>Localização</legend>
+        
+            <label for="endereço">Endereço: </label><br>
+            <input id="endereço" type="text" required><br><br>
+            <label for="num">Número: </label><br>
+            <input id="num" type="text" maxlength="4" placeholder="(Valor entre 1 e 9999)" required><br><br>
+            <label for="city"> Cidade: </label><br>
+            <input id="city" type="text" required><br><br>
+          
+            <label for="estado">Estado: </label><br>
+            <select id="selEstado" required>
+            <option value="">Selecione</option>
+            <option value="">AC</option>
+            <option value="">AL</option>
+            <option value="">AP</option>
+            <option value="">AM</option>
+            <option value="">BA</option>
+            <option value="">CE</option>
+            <option value="">DF</option>
+            <option value="">ES</option>
+            <option value="">GO</option>
+            <option value="">MA</option>
+            <option value="">MT</option>
+            <option value="">MS</option>
+            <option value="">MG</option>
+            <option value="">PA</option>
+            <option value="">PB</option>
+            <option value="">PR</option>
+            <option value="">PE</option>
+            <option value="">PI</option>
+            <option value="">RJ</option>
+            <option value="">RN</option>
+            <option value="">RS</option>
+            <option value="">RO</option>
+            <option value="">RR</option>
+            <option value="">SC</option>
+            <option value="">SP</option>
+            <option value="">SE</option>    
+            <option value="">TO</option>
+            </select>
+        
+     </fieldset>
+    <br>
+     
+    <input type="submit" value="Enviar">
+    <input type="reset" value="Limpar">
+    </form>
+</body>
+</html>
