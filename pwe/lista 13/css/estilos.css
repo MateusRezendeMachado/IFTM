@@ -1,0 +1,17 @@
+p {
+    background-color: rgb(186, 186, 186);
+    font-family: Arial;
+    font-size: 20px;
+    line-height: 3.0em;
+    font-style: italic;
+}
+
+h1 {
+    color: red;
+    background-color: yellow;
+    text-align: center;
+    font-family: Arial;
+    font-size: 50px;
+    text-decoration: underline;
+    letter-spacing: 10px;
+}
