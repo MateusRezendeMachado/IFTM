@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Roboto';
+    line-height: 1.7em;
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+}
+
+.tecnologias {
+    background-color: black;
+    color: white;
+    padding: 20px;
+
+}
+
+header section h1 {
+    font-size: 30px;
+}
+
+.tecnologias div {
+    background-image: url('../img/logoManutencao.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 80px;
+}
+
+.container {
+    width: 1200px;
+    margin: auto;
+}
+
+.box1{
+    margin: auto;
+    width: 1200px;
+}
+
+header nav {
+    background-color: darkblue;
+}
+
+header nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+header nav ul a:link,
+header nav ul a:visited {
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    padding: 20px;
+    margin: 10px;
+    border-bottom: 2px solid darkblue;
+    border-top: 2px solid darkblue;
+}
+
+header nav ul a:hover {
+    border-bottom: 2px solid yellow;
+    border-top: 2px solid red;
+}
+
+.geral {
+    background-color: white;
+    display: flex;
+    padding: 10px;
+}
+.manutencao img {
+    width: 600px;
+    margin: 20px;
+}
+.manutencao p, .manutencao h2 {
+    text-align: justify;
+    margin: 20px;
+}
+.manutencao h2 {
+    color: red;
+}
+.produtos {
+    margin-top: 10px;
+    text-align: center;
+    padding: 20px;
+}
+.produtos p {
+    text-align: justify;
+}
+.produtos div {
+    width:25%;
+    margin: 20px;
+}
+.produtos h2 {
+    color: blue;
+}
+
+.rodape {
+    display: flex;
+    background-color: rgb(200, 200, 200);
+    margin-top: 10px;
+    padding: 20px;
+}
+.rodape div {
+    width: 50%;
+    padding-left: 50px;
+}
+.rodape ul {
+    margin-left: 40px;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
