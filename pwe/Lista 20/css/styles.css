@@ -1,0 +1,181 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+
+/*Mobile*/
+
+header nav ul {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    text-align: center;
+    padding: 5px;
+}
+
+header nav ul a:link,
+header nav  a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+header nav ul li:hover,
+header nav a:hover {
+    background-color: rgb(42, 42, 42);
+    color: white;
+}
+
+section:nth-of-type(odd) {
+    background-color: rgb(42, 42, 42);
+}
+
+section:nth-of-type(even) {
+    background-color: white;
+}
+
+.apresentacao {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 {
+
+    color: white;
+    font-weight: bolder;
+}
+
+.apresentacao p {
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+section img{
+    max-width: 100%;
+    height: auto;
+}
+
+input[type="button"]{
+    background-color: blue;
+    margin-top: 15px;
+    border: none;
+    color: white;
+    padding: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover{
+    background-color: darkblue;
+}
+
+.alfa {
+    display: flex;
+    flex-direction: column;
+}
+
+.alfa>div>div {
+    text-align: center;
+    padding: 10px;
+}
+
+.destaque {
+    color: red;
+    font-weight: bolder;
+    margin-top: 30px;
+
+}
+
+.destaque_text {
+    text-align: justify;
+    padding: 40px 20px;
+}
+
+.apps{
+     padding: 20px 20px;
+}
+.apps h2{
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.apps p{
+    text-align: justify;
+    color: white;
+    padding-bottom: 35px;
+}
+
+.produtos{
+    text-align: center;
+    padding: 40px 20px;
+
+}
+
+.produtos input[type="button"]{
+    margin-bottom: 25px;
+}
+.produtos p{
+    text-align: justify;
+    padding: 20px;
+
+}
+
+figcaption{
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+footer p {
+    color: white;
+    text-align: center;
+}
+ footer section{
+    padding: 30px;
+ }
+
+
+
+/*Desktop*/
+
+@media screen and (min-width: 1024px) {
+
+    section>div,
+    .alfa {
+        width: 1200px;
+        margin: auto;
+    }
+
+    header nav ul {
+        display: flex;
+        background-color: white;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    header nav ul li {
+        text-align: center;
+        padding: 25px;
+        margin-right: 10px;
+    }
+
+    .alfa, .produtos{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .produtos > div{
+        padding: 0px 30px;
+    }
+}
