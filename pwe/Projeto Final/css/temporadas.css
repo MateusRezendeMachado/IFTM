@@ -1,0 +1,249 @@
+.primeiraTemp {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+
+}
+
+.primeiraTemp img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  
+}
+
+
+
+.primeiraTemp h1 {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(1, 65, 1);
+  font-size: 50px;
+  letter-spacing: normal;
+  text-align: center;
+  -webkit-text-stroke: 2.0 #121212;
+  text-shadow: 1px 1px 4px #121212;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.primeiraTemp h1:hover {
+  letter-spacing: 3px;
+  transition: all 1s ease;
+  cursor: default;
+}
+
+.trama hr{
+    width: 270px;
+    border: 1.5px solid darkgreen;
+    margin: 5px auto;
+    border-radius: 100px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.trama p{
+  color: white;
+  text-align: justify;
+  line-height: 30px;
+}
+
+.trama > div{
+  margin-bottom: 10px;
+}
+
+.critica h2{
+  font-size: 33px;
+  padding-top: 50px;
+}
+
+.episodio {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #121212;
+}
+
+.episodioCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  max-width: 850px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  margin: 15px;
+}
+
+
+.episodio-img {
+  display: flex;  
+  background-color: #000; 
+  padding: 10px;        
+}   
+
+.episodio-img img {
+  width: 250px;
+  height: auto;
+
+}
+
+figcaption {
+  font-size: 30px;
+  color: white;
+  margin-top: 8px;
+  font-style: italic;
+  text-align: center;
+}
+
+.IMDB{
+  font-size: 18px;
+  color: white;
+  font-style: italic;
+  text-align: center;
+  padding-bottom: 25px;
+  margin-top: -15px;
+}
+
+.opiniao{
+  color: white;
+  text-align: justify;
+}
+
+.blefe{
+  width: 425px;
+  height: auto;
+}
+
+.grilled{
+  width: 425px;
+  height: auto;
+}
+
+.phoenix{
+  width: 425px;
+  height: auto;
+}
+
+.one{
+  width: 425px;
+  height: auto;
+}
+
+.full{
+  width: 425px;
+  height: auto;
+}
+
+
+
+
+
+/*desktop*/
+
+@media screen and (min-width: 1024px) {
+
+.primeiraTemp {
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.primeiraTemp img {
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.primeiraTemp h1 {
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(1, 65, 1);
+  font-size: 85px;
+  letter-spacing: normal;
+  text-align: center;
+  -webkit-text-stroke: 2.0 #121212;
+  text-shadow: 1px 1px 4px #121212;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.trama p{
+  width: 1200px;
+  margin: auto;
+}
+
+.critica h2{
+  font-size: 38px;
+}
+
+.episodio {
+  max-width: 1200px; 
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding: 5px 20px;
+  background-color: #121212;
+}
+.episodioCard {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+  }
+
+  .piloto{
+    width: 425px;
+    height: auto;
+  }
+
+  .textP p{
+    margin-top: 25px;
+    line-height: 33px;
+
+  }
+
+  .opiniao{
+  color: white;
+  text-align: justify;
+  width: 1200px;
+  margin: auto;
+}
+
+.full{
+  width: 400px;
+  height: 250px;
+}
+
+.salud{
+  width: 400px;
+  height: auto;
+}
+
+figcaption {
+  font-size: 23px;
+}
+
+.IMDB{
+  font-size: 15px;
+}
+
+
+
+
+
+}
+
