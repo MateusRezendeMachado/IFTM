@@ -1,0 +1,17 @@
+h2{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.container{
+    margin-left: 50px;
+}
+
+.operadores{
+    display: flex;
+    gap: 20px;
+}
+
+#result{
+    width: 150px;
+}
