@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
             mensagemDiv.style.color = 'red';
             return;
         }
+
+        if (senhaInput.value.trim() === '') {
+            mensagemDiv.textContent = 'Erro: O campo de senhas deve ser preenchido.';
+            mensagemDiv.style.color = 'red';
+            return;
+        }
         
         
         if (senhaInput.value !== confirmarSenhaInput.value) {
@@ -39,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         
-        mensagemDiv.textContent = 'Todos os campos foram digitados corretamente.';
+        mensagemDiv.textContent = 'Acesso Liberado!';
         mensagemDiv.style.color = 'green';
     }
 });
