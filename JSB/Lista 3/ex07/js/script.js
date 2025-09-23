@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('loginForm');
     const loginInput = document.getElementById('login');
-    const senhaInput = document.getElementById('senha');
+    const senhaInput = document.getElementById('senha'); 
     const confirmarSenhaInput = document.getElementById('confirmarSenha');
     const limparBtn = document.getElementById('limpar');
     const mensagemDiv = document.getElementById('mensagem');
@@ -49,3 +49,4 @@ document.addEventListener('DOMContentLoaded', function() {
         mensagemDiv.style.color = 'green';
     }
 });
+
