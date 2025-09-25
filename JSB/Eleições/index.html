@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Simulação de Eleição</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resultado da Eleição</h1>
+
+        <div class="card">
+            <img src="" alt="" id="imgSorteada1" class="cand-img">
+            <p><strong>Nome do Candidato:</strong> <span id="candSorteado1"></span></p>
+            <p><strong>Partido:</strong> <span id="partSorteado1"></span></p>
+            <p><strong>Porcentagem de votos:</strong> <span id="votos1"></span>%</p>
+        </div>
+
+        <div class="card">
+            <img src="" alt="" id="imgSorteada2" class="cand-img">
+            <p><strong>Nome do Candidato:</strong> <span id="candSorteado2"></span></p>
+            <p><strong>Partido:</strong> <span id="partSorteado2"></span></p>
+            <p><strong>Porcentagem de votos:</strong> <span id="votos2"></span>%</p>
+        </div>
+
+        <div class="resultado">
+            <h2>Candidato(a) vencedor(a):</h2>
+            <p>
+                <span id="candVencedor" class="vencedor"></span>
+                <span id="percVencedor"></span>
+            </p>
+        </div>
+
+        <button id="btnGerar">Gerar Resultado</button>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
