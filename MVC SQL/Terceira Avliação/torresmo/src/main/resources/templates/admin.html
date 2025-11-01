@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout :: layout('Administrador', ~{::content})}">
+  <body>
+    <div th:fragment="content">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1>Área do Administrador</h1>
+        <div>
+          <button
+            id="btnNovo"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#produtoModal">
+            Novo Produto
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover">
+          <thead class="table-danger">
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th class="text-end">Preço</th>
+              <th class="text-end">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="produto : ${produtos}" th:object="${produto}">
+              <td th:text="*{idProduto}">1</td>
+              <td th:text="*{nome}">Nome</td>
+              <td th:text="*{descricao}">Descrição</td>
+              <td class="text-end">
+                R$
+                <span th:text="*{#numbers.formatDecimal(preco, 1, 2)}">0,00</span>
+              </td>
+              <td class="text-end">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-primary me-1 btn-editar"
+                  th:data-id="${produto.idProduto}"
+                  th:data-nome="${produto.nome}"
+                  th:data-descricao="${produto.descricao}"
+                  th:data-preco="${produto.preco}"
+                  th:data-tamanho="${produto.tamanho}"
+                  th:data-disponivel="${produto.disponivel}">
+                  Editar
+                </button>
+
+                <form
+                  th:action="@{'/admin/produtos/' + ${produto.idProduto} + '/delete'}"
+                  method="post"
+                  class="d-inline">
+                  <button
+                    type="submit"
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="return confirm('Excluir produto?');">
+                    Excluir
+                  </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal de criação/edição -->
+      <div class="modal fade" id="produtoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <form
+              id="produtoForm"
+              th:action="@{/admin/produtos}"
+              th:object="${produto}"
+              method="post">
+              <div class="modal-header">
+                <h5 class="modal-title">Produto</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" th:field="*{idProduto}" />
+
+                <div class="mb-3">
+                  <label for="nome" class="form-label">Nome</label>
+                  <input th:field="*{nome}" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="descricao" class="form-label">Descrição</label>
+                  <textarea
+                    th:field="*{descricao}"
+                    class="form-control"
+                    rows="3"></textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="preco" class="form-label">Preço (R$)</label>
+                    <input
+                      th:field="*{preco}"
+                      class="form-control"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      required />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="tamanho" class="form-label">Tamanho</label>
+                    <input th:field="*{tamanho}" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="mb-3 form-check">
+                  <input
+                    th:field="*{disponivel}"
+                    type="checkbox"
+                    class="form-check-input"
+                    value="true" />
+                  <label class="form-check-label" for="disponivel">Disponível</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                <button type="submit" class="btn btn-danger">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <script th:inline="javascript">
+        (function () {
+
+          // Ao clicar em 'Editar', preenche o formulário e abre o modal
+          document.querySelectorAll(".btn-editar").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var id = this.getAttribute("data-id");
+              var nome = this.getAttribute("data-nome");
+              var descricao = this.getAttribute("data-descricao");
+              var preco = this.getAttribute("data-preco");
+              var tamanho = this.getAttribute("data-tamanho");
+              var disponivel = this.getAttribute("data-disponivel");
+
+              // Preenche os campos (th:field gera IDs automaticamente)
+              document.getElementById("idProduto").value = id || "";
+              document.getElementById("nome").value = nome || "";
+              document.getElementById("descricao").value = descricao || "";
+              document.getElementById("preco").value = preco || "";
+              document.getElementById("tamanho").value = tamanho || "";
+
+              // Checkbox com th:field tem comportamento especial
+              var checkDisponivel = document.getElementById("disponivel1");
+              if (checkDisponivel) {
+                checkDisponivel.checked = disponivel === "true" || disponivel === "true";
+              }
+
+              var modal = new bootstrap.Modal(document.getElementById("produtoModal"));
+              modal.show();
+            });
+          });
+
+          // Ao clicar em 'Novo Produto', limpa o formulário
+          var btnNovo = document.getElementById("btnNovo");
+          if (btnNovo) {
+            btnNovo.addEventListener("click", function () {
+              document.getElementById("produtoForm").reset();
+              document.getElementById("idProduto").value = "";
+
+              var checkDisponivel = document.getElementById("disponivel1");
+              if (checkDisponivel) {
+                checkDisponivel.checked = true;
+              }
+            });
+          }
+        })();
+      </script>
+    </div>
+  </body>
+</html>
