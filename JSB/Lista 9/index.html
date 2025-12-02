@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jMaskWiFi.js"></script>
+</head>
+<body>
+    <form>
+        <label for="dataNasc">Data de nascimento:</label>
+        <input type="text" id="dataNasc" onkeypress="inserirMascara('dataNasc', 'xx/xx/xxxx')" placeholder="dd/mm/aaaa">
+        <input type="button" value="Validar" id="btnDataNasc">
+        <br>
+        <br>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" onkeypress="inserirMascara('cpf', 'xxx.xxx.xxx-xx')" placeholder="xxx.xxx.xxx-xx">
+        <input type="button" value="Validar" id="btnCpf">
+        <br>
+        <br>
+        <label for="matricula">Matricula do aluno:</label>
+        <input type="text" id="matricula" onkeypress="inserirMascara('matricula', 'xxxx-xxx/xxx-xx')" placeholder="IFTM-xxx/xxx-yy">
+        <input type="button" value="Validar" id="btnMatricula">
+        <br>
+        <br>
+        <label for="disciplina">Codigo de uma disciplina:</label>
+        <input type="text" id="disciplina" onkeypress="inserirMascara('disciplina', 'XX-xx.xxx-XXXX')" placeholder="MT-xx.xxx-IFTM">
+        <input type="button" value="Validar" id="btnDisciplina">
+        <br>
+        <br>
+        <label for="disciplinaV2">Codigo disciplina V2:</label>
+        <input type="text" id="disciplinaV2" onkeypress="inserirMascara('disciplinaV2', 'XX-xx.xxx-XXXX')" placeholder="MT-xx.xxx-IFTM">
+        <input type="button" value="Validar" id="btnDisciplinaV2">
+        <br>
+        <br>
+        <label for="disciplinaV3">Codigo disciplina V3:</label>
+        <input type="text" id="disciplinaV3" placeholder="MT-xx.xxx-IFTM">
+        <input type="button" value="Validar" id="btnDisciplinaV3">
+        <br>
+        <br>
+        <label for="disciplinaV4">Codigo disciplina V4:</label>
+        <input type="text" id="disciplinaV4" placeholder="MT-xx.xxx-IFTM Y">
+        <input type="button" value="Validar" id="btnDisciplinaV4">
+        <br>
+        <br>
+        <label for="campus">Nome do campus:</label>
+        <input type="text" id="campus" placeholder="xxxxxxxx">
+        <input type="button" value="Validar" id="btnCampus">
+        <br>
+        <br>
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" onkeypress="inserirMascara('telefone', '+xx(xx)xxxxx-xxxx')" placeholder="+xx(xx)xxxxx-xxxx">
+        <input type="button" value="Validar" id="btnTelefone">
+        <br>
+        <br>
+        <label for="telefoneV2">Telefone V2:</label>
+        <input type="text" id="telefoneV2" placeholder="(xx)xxxxx-xxxx ou (xxx)xxxxx-xxxx">
+        <input type="button" value="Validar" id="btnTelefoneV2">
+        <br>
+        <br>
+        <label for="altura">Altura:</label>
+        <input type="text" id="altura" placeholder="x.xx ou x,xx">
+        <input type="button" value="Validar" id="altura">
+        <br>
+        <br>
+        <label for="faturamento">Faturamento:</label>
+        <input type="text" id="faturamento" placeholder="R$xxx.xxx,xx">
+        <input type="button" value="Validar" id="btnFaturamento">
+        <br>
+        <br>
+        <label for="cronometro">Cronometro:</label>
+        <input type="text" id="cronometro" onkeypress="inserirMascara('cronometro', 'XX:XX:XX:XX')" placeholder="HH:MM:SS:CC">
+        <input type="button" value="Validar" id="btnCronometro">
+        <br>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="text" id="senha" placeholder="xxxxxxxx">
+        <input type="button" value="Validar" id="btnSenha">
+    </form>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
