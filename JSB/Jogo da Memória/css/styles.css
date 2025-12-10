@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #8B5A2B;
+    font-family: Arial, sans-serif;
+    color: #f5deb3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* LOGO  */
+.img {
+    width: 120px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Cronometro */
+#cronometro {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    text-align: right;
+    color: #f5deb3;
+    font-weight: 700;
+    line-height: 1;
+    user-select: none;
+}
+
+#cronometro .label {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+#cronometro .clock {
+    font-size: 20px;
+    margin-top: 4px;
+    font-weight: 900;
+}
+
+
+/* SELETOR DE DIFICULDADE  */
+p {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f5deb3;
+    color: #8B5A2B;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color:rgba(0, 100, 0, 0.726);;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e7c999;
+}
+
+/* TABULEIRO  */
+#tabuleiro {
+    margin-top: 30px;
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 12px;
+}
+
+/* PARES */
+#pontos {
+    font-weight: bold;
+}
+
+#pontos, p:last-of-type {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    font-size: 20px;
+}
+
+/*  SAIR  */
+#logout {
+    position: relative;
+    margin-top: 20px;
+    background-color: #b22222;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logout:hover {
+    background-color: #d33;
+}

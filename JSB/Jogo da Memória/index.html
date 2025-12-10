@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo da Memória</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+     <!-- Áudios -->
+    <audio id="audioAmbiente" src="sounds/Ambiente.mp3" loop></audio>
+    <audio id="somVirar" src="sounds/virar.mp3"></audio>
+    <audio id="somVitoria" src="sounds/vitoria.mp3"></audio>
+
+    <!-- AUTH: impede entrar sem login -->
+    <script type="module" src="js/auth.js"></script>
+
+        <img class="img" src="img/login.png" alt="">
+
+
+    <p>Escolha a dificuldade:</p>
+    <select id="nivelDif">
+        <option value="">Selecione...</option>
+        <option value="0">Fácil</option>
+        <option value="1">Médio</option>
+        <option value="2">Difícil</option>
+    </select>
+
+    <button id="btnIniciar">Iniciar</button>
+
+<div id="cronometro">
+  <div class="label">Tempo:</div>
+  <div class="clock"><span id="minutos">00</span>:<span id="segundos">00</span></div>
+</div>
+
+
+
+    
+    <div id="tabuleiro"></div>
+
+    <p>Pares<span id="pontos">0</span></p>
+
+
+
+
+    <button id="logout">Sair</button>
+
+
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>
