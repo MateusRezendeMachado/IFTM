@@ -1,0 +1,167 @@
+/* =====================
+   DARK MODE GLOBAL
+===================== */
+
+body {
+    background-color: #0f1115;   /* quase preto (elegante) */
+    color: #e4e6eb;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Links */
+a {
+    color: #4dabf7;
+}
+a:hover {
+    color: #74c0fc;
+}
+
+/* =====================
+   CONTAINERS
+===================== */
+
+.container,
+.jumbotron {
+    background-color: transparent;
+}
+
+/* =====================
+   CARDS
+===================== */
+
+.card {
+    background-color: #161a22;
+    border: 1px solid #222;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.6);
+}
+
+.card-title {
+    color: #ffffff;
+}
+
+.card-text {
+    color: #b5bac1;
+}
+
+/* =====================
+   BOTÕES
+===================== */
+
+.btn {
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #4dabf7;
+    border: none;
+}
+
+.btn-success {
+    background-color: #51cf66;
+    border: none;
+}
+
+.btn-warning {
+    background-color: #fcc419;
+    border: none;
+    color: #000;
+}
+
+.btn-info {
+    background-color: #15aabf;
+    border: none;
+}
+
+/* =====================
+   TÍTULOS
+===================== */
+
+h1, h2, h3, h4, h5 {
+    color: #ffffff;
+}
+
+/* =====================
+   HR
+===================== */
+
+hr {
+    border-color: #2a2e35;
+}
+
+/* ===== DARK MODE – TEXTO ===== */
+
+body {
+    background-color: #0f1115;
+    color: #ffffff;
+}
+
+.card {
+    background-color: #161a22;
+    color: #ffffff;
+}
+
+.card p,
+.card small,
+.text-muted {
+    color: #e5e7eb !important; /* branco suave */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+}
+
+/* ===== NAVBAR MODERNO ===== */
+
+.nav-blur {
+    background: rgba(15, 17, 21, 0.85);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.logo-icon {
+    font-size: 1.6rem;
+}
+
+.nav-link-modern {
+    position: relative;
+    color: #e5e7eb !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link-modern:hover {
+    color: #ffffff !important;
+}
+
+.nav-link-modern::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+    transition: width 0.3s ease;
+}
+
+.nav-link-modern:hover::after {
+    width: 100%;
+}
+
+/* ESPAÇO PARA NAV FIXA */
+body {
+    padding-top: 80px;
+}
+
+

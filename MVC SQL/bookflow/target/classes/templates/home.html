@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+
+<head>
+    <title>BookFlow | Início</title>
+</head>
+
+<body>
+<section>
+
+    <!-- HERO -->
+    <div class="container-fluid py-5 mb-5"
+         style="background: linear-gradient(135deg, #4f46e5, #6366f1); color: white;">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">📚 BookFlow</h1>
+            <p class="lead mb-4">
+                Sistema moderno e inteligente para gestão de bibliotecas
+            </p>
+            <span class="badge bg-light text-dark px-3 py-2 fs-6">
+                Organização • Controle • Eficiência
+            </span>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-semibold">Painel Principal</h2>
+            <p class="text-muted">
+                Acesse rapidamente os principais módulos do sistema
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- AUTORES -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                    <div class="card-body py-4">
+                        <i class="bi bi-person-badge fs-1 text-primary mb-3"></i>
+                        <h5 class="fw-semibold">Autores</h5>
+                        <p class="text-muted small">
+                            Gerenciamento de autores.
+                        </p>
+                        <a th:href="@{/autores}" class="btn btn-outline-primary w-100">
+                            Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVROS -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                    <div class="card-body py-4">
+                        <i class="bi bi-book fs-1 text-success mb-3"></i>
+                        <h5 class="fw-semibold">Livros</h5>
+                        <p class="text-muted small">
+                            Controle completo do acervo.
+                        </p>
+                        <a th:href="@{/livros}" class="btn btn-outline-success w-100">
+                            Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALUNOS -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                    <div class="card-body py-4">
+                        <i class="bi bi-people fs-1 text-warning mb-3"></i>
+                        <h5 class="fw-semibold">Alunos</h5>
+                        <p class="text-muted small">
+                            Gerenciamento de usuários.
+                        </p>
+                        <a th:href="@{/alunos}" class="btn btn-outline-warning w-100">
+                            Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMPRÉSTIMOS -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                    <div class="card-body py-4">
+                        <i class="bi bi-calendar-check fs-1 text-info mb-3"></i>
+                        <h5 class="fw-semibold">Empréstimos</h5>
+                        <p class="text-muted small">
+                            Controle de retiradas e devoluções.
+                        </p>
+                        <a th:href="@{/emprestimos}" class="btn btn-outline-info w-100">
+                            Acessar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ESTILO EXTRA -->
+    <style>
+        .hover-card {
+            transition: all 0.3s ease;
+            border-radius: 1rem;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+
+</section>
+</body>
+</html>

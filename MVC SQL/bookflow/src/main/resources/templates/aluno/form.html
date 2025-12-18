@@ -1,0 +1,54 @@
+<!-- templates/aluno/form.html -->
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title th:text="${aluno.id != null} ? 'Editar Aluno' : 'Novo Aluno'">Formulário Aluno</title>
+</head>
+<body>
+    <section>
+        <h1 th:text="${aluno.id != null} ? 'Editar Aluno' : 'Novo Aluno'"></h1>
+        
+        <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nome" class="form-label">Nome Completo *</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{nome}" 
+                           required minlength="5" maxlength="100">
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="matricula" class="form-label">Matrícula *</label>
+                    <input type="text" class="form-control" id="matricula" th:field="*{matricula}" 
+                           required minlength="3" maxlength="20">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" 
+                           maxlength="100">
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control" id="telefone" th:field="*{telefone}" 
+                           maxlength="20" placeholder="(34) 99999-9999">
+                </div>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Salvar
+                </button>
+                <a th:href="@{/alunos}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

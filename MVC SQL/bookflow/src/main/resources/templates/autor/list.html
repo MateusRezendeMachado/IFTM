@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Autores - BookFlow</title>
+    
+    <!-- CSS específico para a página de autores -->
+    <link rel="stylesheet" th:href="@{/css/autores-list.css}">
+</head>
+
+<!-- Usa o layout base, passando o título e o conteúdo -->
+<body th:replace="layout :: layout(~{::title}, ~{::section})">
+    <!-- Título que será injetado no layout -->
+    <title>Autores - BookFlow</title>
+    
+    <!-- Conteúdo específico da página de autores -->
+    <section>
+        <div class="autores-container">
+            <h1>Autores</h1>
+
+            <a th:href="@{/autores/novo}" class="btn btn-primary novo-autor mb-4">
+                <i class="bi bi-plus-circle"></i> Novo Autor
+            </a>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Nacionalidade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="autor : ${autores}">
+                        <td th:text="${autor.id}">1</td>
+                        <td th:text="${autor.nome}">Nome</td>
+                        <td th:text="${autor.nacionalidade}">Nacionalidade</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

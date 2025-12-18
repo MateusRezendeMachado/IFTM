@@ -1,0 +1,232 @@
+<!-- templates/emprestimo/form.html -->
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title>Novo Empréstimo - BookFlow</title>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+</head>
+<body>
+    <section>
+        <h1><i class="bi bi-calendar-plus"></i> Novo Empréstimo</h1>
+        
+        <form th:action="@{/emprestimos/salvar}" th:object="${emprestimoDTO}" method="post" id="formEmprestimo">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-person"></i> Dados do Aluno</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="alunoId" class="form-label">Aluno *</label>
+                        <select class="form-select" id="alunoId" th:field="*{alunoId}" required>
+                            <option value="">Selecione um aluno...</option>
+                            <option th:each="aluno : ${alunos}" 
+                                    th:value="${aluno.id}"
+                                    th:text="${aluno.nome + ' - ' + aluno.matricula}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-book"></i> Livros para Empréstimo</h5>
+                </div>
+                <div class="card-body">
+                    <div id="itens-container">
+                        <div class="item-row row mb-3" th:each="item, stat : *{itens}">
+                            <div class="col-md-6">
+                                <label class="form-label">Livro *</label>
+                                <select class="form-select livro-select" th:field="*{itens[__${stat.index}__].livroId}" required>
+                                    <option value="">Selecione um livro...</option>
+                                    <option th:each="livro : ${livrosDisponiveis}" 
+                                            th:value="${livro.id}"
+                                            th:text="${livro.titulo + ' - ' + livro.autor.nome + ' (' + livro.quantidadeExemplares + ' disp.)'}"
+                                            th:data-quantidade="${livro.quantidadeExemplares}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Quantidade *</label>
+                                <input type="number" class="form-control quantidade-input" 
+                                       th:field="*{itens[__${stat.index}__].quantidade}" 
+                                       min="1" max="10" value="1" required>
+                                <div class="form-text quantidade-disponivel text-muted"></div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger btn-remover" 
+                                        th:if="${stat.index > 0}" style="margin-bottom: 8px;">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-3">
+                        <button type="button" id="btn-adicionar-item" class="btn btn-outline-success">
+                            <i class="bi bi-plus-circle"></i> Adicionar Livro
+                        </button>
+                        
+                        <div class="text-end">
+                            <div class="mb-2">
+                                <strong>Total de livros: </strong>
+                                <span id="total-livros" class="badge bg-primary">0</span>
+                            </div>
+                            <div>
+                                <strong>Total de itens: </strong>
+                                <span id="total-itens" class="badge bg-success">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Registrar Empréstimo
+                </button>
+                <a th:href="@{/emprestimos}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </section>
+    
+    <script>
+    $(document).ready(function() {
+        // Adicionar novo item
+        $('#btn-adicionar-item').click(function() {
+            const container = $('#itens-container');
+            const index = container.find('.item-row').length;
+            
+            const newRow = `
+                <div class="item-row row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Livro *</label>
+                        <select class="form-select livro-select" name="itens[${index}].livroId" required>
+                            <option value="">Selecione um livro...</option>
+                            <option th:each="livro : ${livrosDisponiveis}" 
+                                    th:value="${livro.id}"
+                                    th:text="${livro.titulo + ' - ' + livro.autor.nome + ' (' + livro.quantidadeExemplares + ' disp.)'}"
+                                    th:data-quantidade="${livro.quantidadeExemplares}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Quantidade *</label>
+                        <input type="number" class="form-control quantidade-input" 
+                               name="itens[${index}].quantidade" min="1" max="10" value="1" required>
+                        <div class="form-text quantidade-disponivel text-muted"></div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-danger btn-remover" style="margin-bottom: 8px;">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            container.append(newRow);
+            updateTotals();
+        });
+        
+        // Remover item
+        $(document).on('click', '.btn-remover', function() {
+            if ($('.item-row').length > 1) {
+                $(this).closest('.item-row').remove();
+                reindexItems();
+                updateTotals();
+            }
+        });
+        
+        // Atualizar quantidade disponível ao selecionar livro
+        $(document).on('change', '.livro-select', function() {
+            const selectedOption = $(this).find('option:selected');
+            const disponivel = selectedOption.data('quantidade') || 0;
+            const quantidadeText = $(this).closest('.item-row').find('.quantidade-disponivel');
+            quantidadeText.text(`${disponivel} exemplares disponíveis`);
+            
+            // Limitar quantidade máxima
+            const quantidadeInput = $(this).closest('.item-row').find('.quantidade-input');
+            quantidadeInput.attr('max', disponivel);
+            
+            if (parseInt(quantidadeInput.val()) > disponivel) {
+                quantidadeInput.val(disponivel);
+            }
+            
+            updateTotals();
+        });
+        
+        // Atualizar totais
+        $(document).on('input', '.quantidade-input', updateTotals);
+        
+        function reindexItems() {
+            $('#itens-container .item-row').each(function(index) {
+                $(this).find('.livro-select').attr('name', `itens[${index}].livroId`);
+                $(this).find('.quantidade-input').attr('name', `itens[${index}].quantidade`);
+            });
+        }
+        
+        function updateTotals() {
+            let totalLivros = 0;
+            let totalItens = 0;
+            
+            $('.item-row').each(function() {
+                const livroSelecionado = $(this).find('.livro-select').val() !== '';
+                if (livroSelecionado) {
+                    totalLivros++;
+                    totalItens += parseInt($(this).find('.quantidade-input').val()) || 0;
+                }
+            });
+            
+            $('#total-livros').text(totalLivros);
+            $('#total-itens').text(totalItens);
+        }
+        
+        // Validar formulário
+        $('#formEmprestimo').submit(function(e) {
+            let valido = true;
+            let mensagens = [];
+            
+            // Validar aluno
+            if (!$('#alunoId').val()) {
+                valido = false;
+                mensagens.push('Selecione um aluno.');
+            }
+            
+            // Validar pelo menos um livro
+            let livrosSelecionados = 0;
+            $('.livro-select').each(function() {
+                if ($(this).val()) {
+                    livrosSelecionados++;
+                    
+                    // Validar quantidade
+                    const disponivel = $(this).find('option:selected').data('quantidade') || 0;
+                    const quantidade = parseInt($(this).closest('.item-row').find('.quantidade-input').val()) || 0;
+                    
+                    if (quantidade > disponivel) {
+                        valido = false;
+                        mensagens.push(`Quantidade solicitada maior que a disponível para ${$(this).find('option:selected').text()}`);
+                    }
+                }
+            });
+            
+            if (livrosSelecionados === 0) {
+                valido = false;
+                mensagens.push('Adicione pelo menos um livro ao empréstimo.');
+            }
+            
+            if (!valido) {
+                e.preventDefault();
+                alert('Erros no formulário:\n\n' + mensagens.join('\n'));
+            }
+        });
+        
+        // Inicializar
+        updateTotals();
+        $('.livro-select').trigger('change');
+    });
+    </script>
+</body>
+</html>

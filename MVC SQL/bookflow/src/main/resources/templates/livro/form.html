@@ -1,0 +1,66 @@
+<!-- templates/livro/form.html -->
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <title th:text="${livro.id != null} ? 'Editar Livro' : 'Novo Livro'">Formulário Livro</title>
+</head>
+<body>
+    <section>
+        <h1 th:text="${livro.id != null} ? 'Editar Livro' : 'Novo Livro'"></h1>
+        
+        <form th:action="@{/livros/salvar}" th:object="${livro}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            
+            <div class="row">
+                <div class="col-md-8 mb-3">
+                    <label for="titulo" class="form-label">Título *</label>
+                    <input type="text" class="form-control" id="titulo" th:field="*{titulo}" 
+                           required minlength="3" maxlength="200">
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <label for="autor" class="form-label">Autor *</label>
+                    <select class="form-select" id="autor" th:field="*{autor}" required>
+                        <option value="">Selecione um autor...</option>
+                        <option th:each="autor : ${autores}" 
+                                th:value="${autor.id}"
+                                th:text="${autor.nome}"
+                                th:selected="${livro.autor?.id == autor.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="anoPublicacao" class="form-label">Ano de Publicação</label>
+                    <input type="number" class="form-control" id="anoPublicacao" 
+                           th:field="*{anoPublicacao}" min="1000" max="2100">
+                </div>
+                
+                <div class="col-md-5 mb-3">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="text" class="form-control" id="isbn" th:field="*{isbn}" 
+                           maxlength="20">
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <label for="quantidadeExemplares" class="form-label">Exemplares *</label>
+                    <input type="number" class="form-control" id="quantidadeExemplares" 
+                           th:field="*{quantidadeExemplares}" min="0" required>
+                </div>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Salvar
+                </button>
+                <a th:href="@{/livros}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

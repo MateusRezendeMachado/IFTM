@@ -1,0 +1,371 @@
+/* =====================
+   DARK MODE GLOBAL
+===================== */
+
+body {
+    background-color: #0f1115;   /* quase preto (elegante) */
+    color: #e4e6eb;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    padding-top: 80px; /* Espaço para navbar fixa */
+    min-height: 100vh;
+}
+
+/* Links */
+a {
+    color: #4dabf7;
+    text-decoration: none;
+}
+a:hover {
+    color: #74c0fc;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+
+.navbar {
+    background: rgba(15, 17, 21, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #2a2e35;
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: #74c0fc !important;
+}
+
+.logo-icon {
+    font-size: 1.6rem;
+}
+
+.navbar-toggler {
+    border: 1px solid #2a2e35;
+    color: #ffffff;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.3);
+}
+
+.nav-link-modern {
+    position: relative;
+    color: #e5e7eb !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem !important;
+}
+
+.nav-link-modern:hover {
+    color: #ffffff !important;
+}
+
+.nav-link-modern::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+    transition: width 0.3s ease;
+}
+
+.nav-link-modern:hover::after {
+    width: calc(100% - 1.5rem);
+}
+
+.nav-link-modern.active {
+    color: #4dabf7 !important;
+}
+
+.navbar-nav {
+    gap: 1rem;
+}
+
+/* =====================
+   CONTAINERS
+===================== */
+
+.container,
+.jumbotron {
+    background-color: transparent;
+}
+
+/* =====================
+   AUTORES CONTAINER
+===================== */
+
+.autores-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.autores-container h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.novo-autor {
+    display: inline-block;
+    background-color: #4dabf7;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    border: none;
+}
+
+.novo-autor:hover {
+    background-color: #74c0fc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(77, 171, 247, 0.3);
+    color: white;
+}
+
+/* =====================
+   TABLE
+===================== */
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    background-color: #161a22;
+    border: 1px solid #222;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+thead {
+    background-color: #1e222b;
+}
+
+thead th {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 20px 15px;
+    text-align: left;
+    border-bottom: 2px solid #2a2e35;
+    letter-spacing: 0.3px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #2a2e35;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #1e222b;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody td {
+    padding: 18px 15px;
+    color: #b5bac1;
+    font-size: 1rem;
+}
+
+tbody td:first-child {
+    color: #4dabf7;
+    font-weight: 500;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+/* =====================
+   MAIN CONTENT
+===================== */
+
+main {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+main > .container {
+    padding-top: 20px;
+}
+
+/* =====================
+   CARDS
+===================== */
+
+.card {
+    background-color: #161a22;
+    border: 1px solid #222;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.6);
+}
+
+.card-title {
+    color: #ffffff;
+}
+
+.card-text {
+    color: #b5bac1;
+}
+
+/* =====================
+   BOTÕES
+===================== */
+
+.btn {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #4dabf7;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #74c0fc;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: #51cf66;
+    border: none;
+}
+
+.btn-warning {
+    background-color: #fcc419;
+    border: none;
+    color: #000;
+}
+
+.btn-info {
+    background-color: #15aabf;
+    border: none;
+}
+
+/* =====================
+   TÍTULOS
+===================== */
+
+h1, h2, h3, h4, h5 {
+    color: #ffffff;
+}
+
+/* =====================
+   HR
+===================== */
+
+hr {
+    border-color: #2a2e35;
+}
+
+/* ===== DARK MODE – TEXTO ===== */
+
+.card p,
+.card small,
+.text-muted {
+    color: #e5e7eb !important; /* branco suave */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+}
+
+/* =====================
+   RESPONSIVIDADE
+===================== */
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+    
+    .navbar {
+        padding: 0.75rem 0;
+    }
+    
+    .autores-container {
+        padding: 15px;
+        margin-top: 10px;
+    }
+    
+    .autores-container h1 {
+        font-size: 2rem;
+    }
+    
+    .novo-autor {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 15px 10px;
+    }
+    
+    .table-wrapper {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand span:last-child {
+        font-size: 1.2rem;
+    }
+    
+    .logo-icon {
+        font-size: 1.4rem;
+    }
+    
+    .autores-container h1 {
+        font-size: 1.75rem;
+    }
+}
+
+
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Garantir que o navbar fique acima de tudo */
+.navbar {
+    z-index: 1030;
+}
