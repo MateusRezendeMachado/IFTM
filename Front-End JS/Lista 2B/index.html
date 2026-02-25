@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        let usersTable = [
+            { nome: "Ana", idade: 18, sexo: "F", salario: 1000 },
+            { nome: "João", idade: 20, sexo: "M", salario: 3000 },
+            { nome: "César", idade: 33, sexo: "M", salario: 1900 },
+            { nome: "Maria", idade: 12, sexo: "F", salario: 7000 },
+            { nome: "Zé", idade: 17, sexo: "M", salario: 2400 }
+        ];
+        // 1
+        usersTable.forEach(user => {
+            if (user.idade >= 18) {
+                console.log(`${user.nome} tem ${user.idade} anos e é maior de idade`);
+            }
+        })
+
+        // 2
+        const masculino = usersTable
+            .filter(user => user.sexo === "M")
+            .map(user => user.nome);
+        console.log("Usuários do sexo masculino:", masculino);
+
+        //3
+        const dadosMaiorSalario = usersTable.reduce((maior, user) => {
+            return user.salario > maior.salario ? user : maior;
+        }, usersTable[0]);
+        console.log("Dados do usuário com maior salário:", dadosMaiorSalario);
+
+        //4
+        const mulher5000 = usersTable.some(user => user.sexo === "F" && user.salario > 5000);
+        console.log("Existe alguma mulher com salário superior a R$ 5000?", mulher5000);
+
+        //5
+        const mediaSalarioHomens = usersTable
+            .filter(user => user.sexo === "M")
+            .reduce((acc, user) => {
+                return acc + user.salario;
+            }, 0) / usersTable.filter(user => user.sexo === "M").length;
+
+        const mediaSalarioMulheres = usersTable
+            .filter(user => user.sexo === "F")
+            .reduce((acc, user) => {
+                return acc + user.salario;
+            }, 0) / usersTable.filter(user => user.sexo === "F").length;
+
+        console.log("Média salarial dos homens:", mediaSalarioHomens.toFixed(2));
+        console.log("Média salarial das mulheres:", mediaSalarioMulheres.toFixed(2));
+
+    </script>
+</body>
+
+</html>
