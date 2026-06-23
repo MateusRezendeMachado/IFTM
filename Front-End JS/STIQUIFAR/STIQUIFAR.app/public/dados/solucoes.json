@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "titulo": "Assistência jurídica especializada",
+    "texto": "Apoio completo para orientar o trabalhador em dúvidas, conflitos e situações que envolvem seus direitos."
+  },
+  {
+    "id": 2,
+    "titulo": "Filiação rápida e proteção imediata",
+    "texto": "Um caminho simples para se aproximar do sindicato e contar com suporte desde o primeiro contato."
+  },
+  {
+    "id": 3,
+    "titulo": "Negociação e defesa dos direitos",
+    "texto": "Atuação direta para garantir melhores salários, benefícios e condições de trabalho para toda a categoria."
+  },
+  {
+    "id": 4,
+    "titulo": "Qualificação profissional",
+    "texto": "Cursos, capacitações e oportunidades que ajudam o trabalhador a crescer na carreira e aumentar sua renda."
+  },
+  {
+    "id": 5,
+    "titulo": "Saúde e bem-estar",
+    "texto": "Apoio para que o trabalhador e sua família tenham mais qualidade de vida dentro e fora do ambiente profissional."
+  },
+  {
+    "id": 6,
+    "titulo": "Informação e suporte constante",
+    "texto": "Comunicação direta para manter a categoria informada sobre direitos, conquistas e oportunidades."
+  }
+]

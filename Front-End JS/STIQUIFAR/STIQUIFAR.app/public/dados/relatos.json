@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "nome": "Fernando Dimas Alves",
+        "relato": "Ao longo da minha trajetória, acompanhei a importância do sindicato na defesa dos direitos e na busca por melhores condições de trabalho. Cada conquista é resultado da união e da participação coletiva. Tenho orgulho de fazer parte dessa história. O STIQUIFAR representa luta, segurança e valorização da categoria. Quando estamos unidos, somos mais fortes para transformar realidades.",
+        "imagem": "/imagens/relatos/Relato1.png"
+    },
+    {
+        "id": 2,
+        "nome": "Emerson Peres de Souza",
+        "relato": "O STIQUIFAR representa luta, apoio e compromisso com uma sociedade mais justa. É uma entidade que trabalha em defesa dos trabalhadores, combatendo desigualdades e fortalecendo quem mais precisa. Para mim, o sindicato foi um lugar de acolhimento e orientação. Encontrei apoio para crescer como trabalhador e também como cidadão. O STIQUIFAR mostra que, com união, é possível construir caminhos melhores.",
+        "imagem": "/imagens/relatos/Relato2.png"
+    },
+    {
+        "id": 3,
+        "nome": "Vanderlei dos Reis Mota",
+        "relato": "Para mim, o STIQUIFAR é mais que um sindicato: é uma casa acolhedora para trabalhadores e para a comunidade. Além de lutar pelos direitos da categoria, também atua com responsabilidade social, apoiando quem mais precisa nas áreas da saúde, educação e orientação jurídica. Tenho orgulho de fazer parte dessa equipe fantástica, que trabalha com compromisso, união e respeito ao próximo.",
+        "imagem": "/imagens/relatos/Relato3.png"
+    },
+    {
+        "id": 4,
+        "nome": "José Lázaro Rodrigues",
+        "relato": "O STIQUIFAR representa responsabilidade social, garantia de direitos e novas conquistas para os trabalhadores. Em meio a tantas desigualdades, é uma entidade que luta pela classe operária e transforma situações de risco em mais segurança e dignidade. Tenho alegria em fazer parte dessa caminhada, marcada por negociações, trabalho de campo, vitórias e aprendizados. Cada conquista fortalece a categoria e valoriza o ser humano. A luta não pode parar. Ainda temos muito a conquistar. Avante!",
+        "imagem": ""
+    },
+    {
+        "id": 5,
+        "nome": "Mauro dos Reis Rosa",
+        "relato": "Conheci o sindicato ainda como STIACAU, e desde então passei a admirar a luta pelos direitos dos trabalhadores. Quando pude me filiar, ele já se chamava STIQUIFAR, mas o compromisso com a categoria permanecia firme. Hoje vejo uma instituição sólida, que transforma vidas, realiza sonhos e cria oportunidades por meio da formação profissional. Tenho orgulho de fazer parte dessa entidade e dessa história de luta.",
+        "imagem": ""
+    },
+    {
+        "id": 6,
+        "nome": "Claudinei Santos Malaquias",
+        "relato": "O sindicato representa equilíbrio, justiça e transparência nas negociações entre empresas e trabalhadores. O STIQUIFAR atua sempre em busca de melhores condições de trabalho, mais direitos, benefícios e qualidade de vida para seus associados. É uma instituição forte, comprometida com a categoria e reconhecida por sua importância. Tenho honra em fazer parte dessa história e contribuir com essa luta.",
+        "imagem": "/imagens/relatos/Relato6.png"
+    },
+    {
+        "id": 7,
+        "nome": "Edmar",
+        "relato": "Conhecer o STIQUIFAR me fez entender a força da união e da luta dos trabalhadores. Ao longo dos anos, acompanhei desafios, mobilizações e conquistas que fortaleceram a categoria e transformaram vidas. Destaco com gratidão a liderança da presidente Maria da Graça Carriconde, essencial para o crescimento do STIQUIFAR e do Instituto IEPT. Por meio da qualificação, inclusão e compromisso social, essas instituições abriram caminhos para muitos trabalhadores e jovens. Tenho orgulho de fazer parte dessa história e dessa grande família chamada STIQUIFAR.",
+        "imagem": "/imagens/relatos/Relato7.png"
+    },
+    {
+        "id": 8,
+        "nome": "Davidson Leonardo Vieira dos Santos",
+        "relato": "O sindicato é a ferramenta que permite ao trabalhador negociar com mais força, equilíbrio e dignidade diante do empregador. Além de defender direitos, o STIQUIFAR promove conhecimento, informação e consciência coletiva. Uma instituição forte valoriza o trabalhador e fortalece o mercado local. Tenho orgulho de fazer parte da direção sindical e contribuir para essa luta em defesa da categoria.",
+        "imagem": "/imagens/relatos/Relato8.png"
+    },
+    {
+        "id": 9,
+        "nome": "Luciano Márcio Rezende Borges",
+        "relato": "A história do nosso sindicato começou ainda na década de 80, quando era conhecido como STIACAU, e seguiu fortalecida como STIQUIFAR. Ao longo dos anos, foram muitos desafios, lutas e conquistas em defesa dos trabalhadores. O sindicato tem papel essencial na garantia de direitos, por meio de acordos coletivos, ações coletivas e individuais. Fazer parte de uma instituição comprometida com o bem-estar da categoria é motivo de gratidão e orgulho.",
+        "imagem": "/imagens/relatos/Relato9.png"
+    },
+    {
+        "id": 10,
+        "nome": "Ewerton Marson Passos",
+        "relato": "O STIQUIFAR é mais que uma entidade: é a voz dos trabalhadores, a força que defende direitos e protege contra injustiças. Representa união, luta e dignidade, mostrando que juntos somos capazes de conquistar melhores condições de trabalho e mais valorização. Estar à frente dessa instituição é um privilégio e uma grande responsabilidade. Luto diariamente por um futuro mais justo, digno e respeitoso para todos os trabalhadores.",
+        "imagem": "/imagens/relatos/Relato10.png"
+    },
+    {
+        "id": 11,
+        "nome": "Edimilson Rocha Alves",
+        "relato": "O STIQUIFAR representa a força que enfrenta abusos e injustiças contra os trabalhadores. Em seus 46 anos de história, o sindicato tem lutado por equilíbrio nas relações de trabalho, mais direitos, segurança e melhores condições para a categoria. Sua atuação também vai além da defesa trabalhista, promovendo qualidade de vida por meio do clube e formação profissional pelo IEPT. Seguir com seriedade, responsabilidade e compromisso com as pessoas é o que fortalece essa caminhada.",
+        "imagem": "/imagens/relatos/Relato11.png"
+    },
+    {
+        "id": 12,
+        "nome": "Fábio Júnior Ribeiro dos Santos",
+        "relato": "O STIQUIFAR é uma instituição séria, atuante e comprometida com a defesa da classe trabalhadora. Ao acompanhar sua trajetória, pude ver de perto a importância da luta por melhores condições de trabalho, direitos, benefícios e proteção para a categoria. Por meio do sindicato, os trabalhadores têm mais força para negociar e buscar justiça diante das dificuldades do dia a dia. Além da defesa trabalhista, o STIQUIFAR oferece orientação, apoio jurídico, convênios e cursos por meio do IEPT. Tenho orgulho de fazer parte dessa luta por um futuro mais digno para todos.",
+        "imagem": "/imagens/relatos/Relato12.png"
+    }
+]

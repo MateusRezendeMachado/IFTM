@@ -1,0 +1,283 @@
+.dores {
+  position: relative;
+  padding: 100px 0;
+  background: linear-gradient(180deg, #0b0b0d 0%, #151518 100%);
+  overflow: hidden;
+}
+
+.container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.cabecalho {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cabecalho h2 {
+  color: #ffffff;
+  font-size: clamp(34px, 4.8vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-weight: 950;
+}
+
+.cabecalho p {
+  max-width: 720px;
+  margin: 20px auto 0;
+  color: #c9c0c4;
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.carrossel {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 58px 1fr 58px;
+  gap: 22px;
+  align-items: center;
+
+  opacity: 0;
+  transform: translateY(46px);
+  transition: opacity 0.9s ease 0.18s, transform 0.9s ease 0.18s;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  align-items: center;
+  min-height: 390px;
+
+  /* ALTERADO: transição mais suave e duração maior */
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
+}
+
+/* ALTERADO: opacidade maior, sem blur */
+.trocando {
+  opacity: 0.6;
+  /* filter: blur(1.8px); removido */
+}
+
+/* ALTERADO: deslocamento maior para suavizar */
+.trocando.proximo {
+  transform: translateX(-60px) scale(0.985);
+}
+
+.trocando.anterior {
+  transform: translateX(60px) scale(0.985);
+}
+
+.card {
+  position: relative;
+  min-height: 320px;
+  padding: 58px 34px 34px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #1b1b20 0%, #111114 100%);
+  border: 1px solid #2d2a2e;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+
+  transition: 0.35s ease;
+}
+
+.card h3 {
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 950;
+  max-width: 92%;
+  margin: 0 auto;
+}
+
+.card p {
+  margin-top: 26px;
+  color: #f0e8eb;
+  font-size: 17px;
+  line-height: 1.75;
+  font-weight: 600;
+}
+
+.principal {
+  min-height: 370px;
+  transform: scale(1.05);
+  background:
+    linear-gradient(180deg, rgba(217, 31, 56, 0.035), transparent 38%),
+    linear-gradient(180deg, #1c1c21 0%, #121215 100%);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+  z-index: 2;
+}
+
+.principal h3 {
+  font-size: 30px;
+}
+
+.principal p {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.lateral {
+  transform: scale(0.9);
+  opacity: 0.44;
+  filter: blur(1.1px);
+}
+
+.seta {
+  width: 58px;
+  height: 58px;
+  border: 1px solid #2d2a2e;
+  border-radius: 50%;
+  background-color: #18181c;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 42px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: 0.25s ease;
+}
+
+.seta:hover {
+  background-color: #d91f38;
+  border-color: #d91f38;
+  transform: translateY(-2px);
+}
+
+.seta:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.carregando {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* Efeito ao rolar até a seção */
+
+.visivel .cabecalho {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visivel .carrossel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visivel .principal {
+  animation: destaqueCard 0.9s ease 0.35s both;
+}
+
+.visivel .lateral {
+  animation: lateralCard 0.9s ease 0.45s both;
+}
+
+@keyframes destaqueCard {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(34px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+}
+
+@keyframes lateralCard {
+  from {
+    opacity: 0;
+    transform: scale(0.84) translateY(34px);
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 0.44;
+    transform: scale(0.9) translateY(0);
+    filter: blur(1.1px);
+  }
+}
+
+/* Responsivo */
+
+@media (max-width: 900px) {
+  .carrossel {
+    grid-template-columns: 48px 1fr 48px;
+    gap: 10px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .lateral {
+    display: none;
+  }
+
+  .principal {
+    transform: none;
+    min-height: 340px;
+  }
+
+  .seta {
+    width: 48px;
+    height: 48px;
+    font-size: 34px;
+  }
+
+  @keyframes destaqueCard {
+    from {
+      opacity: 0;
+      transform: translateY(34px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .dores {
+    padding: 76px 0;
+  }
+
+  .container {
+    width: min(100%, calc(100% - 28px));
+  }
+
+  .carrossel {
+    margin-top: 42px;
+  }
+
+  .card {
+    padding: 46px 24px 30px;
+  }
+
+  .card h3 {
+    font-size: 23px;
+  }
+
+  .card p {
+    font-size: 15px;
+  }
+}

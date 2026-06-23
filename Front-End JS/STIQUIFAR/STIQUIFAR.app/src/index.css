@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  /* Fundo agora com um gradiente muito sutil para dar profundidade */
+  background: radial-gradient(circle at 20% 30%, #141418, #0b0b0d 80%);
+  color: #f5eff1;
+  overflow-x: hidden;
+  /* Melhor legibilidade e espaçamento geral */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* Links com transição suave e cor de destaque */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: #d91f38; /* vermelho elegante que já está nos divisores */
+}
+
+/* Headings com tipografia mais marcante e espaçamento adequado */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 500; /* peso médio para elegância */
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+/* Botões, inputs, etc. herdam a fonte */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* Divisores entre seções mais refinados */
+section:not(:first-of-type) {
+  position: relative;
+  padding-top: 3rem; /* mais espaço antes do divisor */
+}
+
+section:not(:first-of-type)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px; /* mais fino */
+  background: linear-gradient(90deg, transparent, rgba(217, 31, 56, 0.4), transparent);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(217, 31, 56, 0.15); /* brilho sutil */
+}
+
+/* Personalização da scrollbar para combinar com o tema escuro */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1e;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a40;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d91f38;
+}

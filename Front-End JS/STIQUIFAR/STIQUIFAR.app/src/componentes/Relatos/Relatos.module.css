@@ -1,0 +1,372 @@
+/* ===== Seção principal ===== */
+.relatos {
+  position: relative;
+  padding: 104px 0;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(217, 31, 56, 0.08), transparent 28%),
+    linear-gradient(180deg, #151518 0%, #0b0b0d 100%);
+  overflow: hidden;
+}
+
+/* Container centralizado */
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* ===== Cabeçalho com animação de entrada ===== */
+.cabecalho {
+  max-width: 820px;
+  margin: 0 auto 54px;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cabecalho h2 {
+  color: #ffffff;
+  font-size: clamp(34px, 4.8vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-weight: 950;
+}
+
+.cabecalho p {
+  max-width: 720px;
+  margin: 20px auto 0;
+  color: #c9c0c4;
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* ===== Layout: carrossel + controles ===== */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 86px;
+  gap: 28px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 0.9s ease 0.16s, transform 0.9s ease 0.16s;
+}
+
+/* ===== Carrossel (altura automática, com mínimo) ===== */
+.carrossel {
+  display: grid;
+  grid-template-rows: 145px 340px 145px;
+  gap: 18px;
+  height: 666px;
+  transition:
+    opacity 0.35s ease,
+    transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.35s ease;
+}
+
+/* Animação de transição */
+.animando {
+  opacity: 0.34;
+  filter: blur(1.5px);
+}
+
+.animando.baixo {
+  transform: translateY(-28px) scale(0.99);
+}
+
+.animando.cima {
+  transform: translateY(28px) scale(0.99);
+}
+
+/* ===== Cards ===== */
+.card {
+  height: 100%;
+  border-radius: 28px;
+  border: 1px solid #2d2a2e;
+  background:
+    linear-gradient(180deg, rgba(217, 31, 56, 0.025), transparent 34%),
+    linear-gradient(180deg, #1b1b20 0%, #111114 100%);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: 0.35s ease;
+}
+
+.principal {
+  background:
+    linear-gradient(90deg, rgba(217, 31, 56, 0.065), transparent 46%),
+    linear-gradient(180deg, #1d1d23 0%, #121215 100%);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+  transform: scale(1.015);
+  z-index: 2;
+}
+
+.lateral {
+  opacity: 0.42;
+  filter: blur(1.2px);
+  transform: scale(0.96);
+}
+
+/* ===== Conteúdo interno do card ===== */
+.conteudoRelato {
+  height: 100%;
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.perfil {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.perfil img {
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32);
+}
+
+.perfil strong,
+.autorCentralizado strong {
+  display: block;
+  margin-top: 14px;
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 1.2;
+  font-weight: 950;
+}
+
+.perfil span,
+.autorCentralizado span {
+  display: block;
+  margin-top: 5px;
+  color: #ff6a7d;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.texto p,
+.semImagem p {
+  color: #f0e8eb;
+  font-size: 18px;
+  line-height: 1.75;
+  font-weight: 550;
+  font-style: italic;
+}
+
+.semImagem {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.autorCentralizado {
+  margin-top: 18px;
+}
+
+/* ===== Controles (setas + contador) ===== */
+.controles {
+  width: 86px;
+  height: 666px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  align-self: center;
+}
+
+.controleBotao {
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid #2d2a2e;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+    #18181c;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 950;
+  line-height: 1;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+  transition: 0.25s ease;
+}
+
+.controleBotao:hover {
+  transform: translateY(-3px);
+}
+
+.controleBotao:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.contador {
+  color: #c9c0c4;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.carregando {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* ===== Efeito ao rolar (entrada) ===== */
+.visivel .cabecalho {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visivel .layout {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================== */
+/* ===== RESPONSIVO ===== */
+/* ========================================== */
+
+/* Tablets e telas médias */
+@media (max-width: 800px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+    /* volta a ser uma coluna */
+    gap: 24px;
+    position: relative;
+    /* mantém para os botões absolutos, mas vamos reposicioná-los */
+  }
+
+
+  .controles {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .controleBotao {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .conteudoRelato {
+    height: 100%;
+    min-height: 0;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .perfil img {
+    width: 82px;
+    height: 82px;
+    border-radius: 20px;
+  }
+
+  .texto p,
+  .semImagem p {
+    font-size: 16px;
+  }
+
+  .texto p,
+  .semImagem p {
+    color: #f0e8eb;
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.6;
+    font-weight: 550;
+    font-style: italic;
+  }
+
+  .texto::-webkit-scrollbar,
+  .semImagem::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .texto::-webkit-scrollbar-track,
+  .semImagem::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 999px;
+  }
+
+  .texto::-webkit-scrollbar-thumb,
+  .semImagem::-webkit-scrollbar-thumb {
+    background: rgba(217, 31, 56, 0.55);
+    border-radius: 999px;
+  }
+
+  .principal {
+    min-height: auto;
+  }
+
+  .lateral {
+    min-height: auto;
+  }
+
+  .carrossel {
+    grid-template-rows: 125px 360px 125px;
+    height: 646px;
+    min-height: auto;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 560px) {
+  .relatos {
+    padding: 78px 0;
+  }
+
+  .container {
+    width: min(100%, calc(100% - 28px));
+  }
+
+  .cabecalho {
+    margin-bottom: 42px;
+  }
+
+  .conteudoRelato {
+    padding: 22px;
+  }
+
+  .principal {
+    min-height: 300px;
+  }
+
+  .controleBotao {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .controles {
+    gap: 14px;
+  }
+
+  .carrossel {
+    grid-template-rows: 115px 390px 115px;
+    height: 656px;
+    min-height: auto;
+  }
+}

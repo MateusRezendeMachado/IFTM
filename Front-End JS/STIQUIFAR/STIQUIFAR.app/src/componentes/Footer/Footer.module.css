@@ -1,0 +1,126 @@
+.footer {
+  position: relative;
+  padding: 42px 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(217, 31, 56, 0.1), transparent 34%),
+    linear-gradient(180deg, #111114 0%, #070708 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  text-align: center;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logoArea img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 14px;
+  padding: 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    #1b1b20;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.logoArea div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.05;
+}
+
+.logoArea strong {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 950;
+  letter-spacing: -0.03em;
+}
+
+.logoArea span {
+  margin-top: 4px;
+  color: #c9c0c4;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.redes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.redes a {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    #151518;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  transition: 0.25s ease;
+}
+
+.redes a:hover {
+  transform: translateY(-4px);
+  color: #ffffff;
+  border-color: rgba(217, 31, 56, 0.55);
+  background: linear-gradient(180deg, #d91f38, #9e1024);
+  box-shadow: 0 18px 36px rgba(217, 31, 56, 0.26);
+}
+
+.redes svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.footer p {
+  color: #c9c0c4;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .footer {
+    padding: 36px 0;
+  }
+
+  .container {
+    width: min(100%, calc(100% - 28px));
+  }
+
+  .logoArea {
+    flex-direction: column;
+  }
+
+  .logoArea div {
+    align-items: center;
+  }
+
+  .redes a {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}

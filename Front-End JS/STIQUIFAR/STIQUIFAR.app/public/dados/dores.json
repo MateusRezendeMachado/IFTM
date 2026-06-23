@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "numero": "01",
+    "titulo": "Defesa dos direitos trabalhistas",
+    "texto": "Quando os direitos não são respeitados, o trabalhador pode se sentir inseguro e sem saber a quem recorrer."
+  },
+  {
+    "id": 2,
+    "numero": "02",
+    "titulo": "Negociações salariais",
+    "texto": "Salários defasados e acordos pouco claros impactam diretamente a valorização e a estabilidade da categoria."
+  },
+  {
+    "id": 3,
+    "numero": "03",
+    "titulo": "Assistência jurídica",
+    "texto": "Dúvidas sobre contratos, benefícios e direitos trabalhistas exigem orientação correta no momento certo."
+  },
+  {
+    "id": 4,
+    "numero": "04",
+    "titulo": "Convênios e benefícios",
+    "texto": "A falta de acesso a benefícios e parcerias pode tornar a rotina do trabalhador mais difícil e menos assistida."
+  },
+  {
+    "id": 5,
+    "numero": "05",
+    "titulo": "Qualificação profissional",
+    "texto": "Sem capacitação, muitos profissionais encontram barreiras para crescer e acompanhar as mudanças do mercado."
+  },
+  {
+    "id": 6,
+    "numero": "06",
+    "titulo": "Saúde e bem-estar",
+    "texto": "Jornadas intensas e pressão constante podem afetar a saúde física, mental e emocional do trabalhador."
+  },
+  {
+    "id": 7,
+    "numero": "07",
+    "titulo": "Representação da categoria",
+    "texto": "Quando a categoria não está organizada, suas necessidades perdem força diante de decisões importantes."
+  },
+  {
+    "id": 8,
+    "numero": "08",
+    "titulo": "Informação e orientação",
+    "texto": "A falta de informação confiável faz com que muitos trabalhadores deixem de buscar apoio ou reivindicar direitos."
+  }
+]

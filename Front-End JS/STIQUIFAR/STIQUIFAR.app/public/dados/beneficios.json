@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "titulo": "Defesa dos Direitos e Representação Sindical",
+    "resumo": "Uma entidade forte, atuante e comprometida com a defesa dos trabalhadores.",
+    "texto": "O principal benefício de ser STIQUIFAR é contar com uma entidade forte, atuante e comprometida com a defesa dos trabalhadores. O sindicato representa a categoria nas negociações coletivas, acompanha demandas trabalhistas e busca continuamente melhores condições de trabalho, remuneração e valorização profissional.",
+    "imagem": "/imagens/beneficios/Direitos.png"
+  },
+  {
+    "id": 2,
+    "titulo": "Assistência Jurídica",
+    "resumo": "Orientação e suporte para auxiliar trabalhadores em questões relacionadas aos seus direitos.",
+    "texto": "Orientação e suporte para auxiliar os trabalhadores em questões relacionadas aos seus direitos, proporcionando mais segurança, informação e respaldo quando necessário.",
+    "imagem": "/imagens/beneficios/Advogados.png"
+  },
+  {
+    "id": 3,
+    "titulo": "Saúde, Odontologia e Bem-Estar",
+    "resumo": "Rede de parceiros para cuidar da saúde, qualidade de vida e bem-estar.",
+    "texto": "Acesso a uma ampla rede de parceiros nas áreas de saúde, odontologia, exames laboratoriais, saúde mental e qualidade de vida, oferecendo mais cuidado para os associados e seus familiares.",
+    "imagem": "/imagens/beneficios/bemEstar.png"
+  },
+{
+  "id": 4,
+  "titulo": "Cursos de Formação Inicial e Continuada",
+  "resumo": "Cursos livres de qualificação social e profissional para trabalhadores, adolescentes e jovens.",
+  "texto": "O IEPT oferece cursos de formação inicial e continuada por meio do projeto Conectando Educação e Trabalho, Construindo Futuros. A iniciativa promove capacitação profissional e humana, com formações em áreas como administração, logística, processos industriais, tecnologia, robótica, automação e desenvolvimento de jogos.",
+  "imagem": "/imagens/beneficios/IEPT.png"
+},
+  {
+    "id": 5,
+    "titulo": "Convênios e Descontos Exclusivos",
+    "resumo": "Condições especiais em diversos segmentos para gerar economia ao associado.",
+    "texto": "Uma rede diversificada de parceiros que oferece condições especiais em diversos segmentos, gerando economia e mais vantagens para os associados.",
+    "imagem": "/imagens/beneficios/descontos.png"
+  },
+  {
+    "id": 6,
+    "titulo": "Clube Recreativo STIQUIFAR (CEPES)",
+    "resumo": "Espaço de lazer, esporte, convivência e integração para trabalhadores e familiares.",
+    "texto": "Um espaço dedicado ao lazer, esporte, convivência e integração dos trabalhadores e seus familiares. Associados ao sindicato contam com condições diferenciadas para adesão ao clube.",
+    "imagem": "/imagens/beneficios/clube.jpeg"
+  },
+  {
+    "id": 7,
+    "titulo": "Turismo e Lazer",
+    "resumo": "Parcerias para hospedagens, parques, colônias de férias e opções de lazer.",
+    "texto": "Parcerias que ampliam o acesso a hospedagens, parques, colônias de férias e outras opções de lazer para toda a família.",
+    "imagem": "/imagens/beneficios/turismo.png"
+  }
+
+
+]
