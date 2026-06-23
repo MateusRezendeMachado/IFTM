@@ -16,7 +16,7 @@ function Whatsapp() {
       chatboxHeight={360}
       notification={true}
       notificationDelay={20}
-      notificationLoop={2}
+      notificationLoop={2} 
       chatboxStyle={{
         borderRadius: "22px",
         overflow: "hidden",
