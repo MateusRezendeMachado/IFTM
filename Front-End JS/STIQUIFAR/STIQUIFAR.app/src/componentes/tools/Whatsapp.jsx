@@ -4,7 +4,7 @@ import { FloatingWhatsApp } from "react-floating-whatsapp";
 function Whatsapp() {
   return (
     <FloatingWhatsApp
-      phoneNumber="+553433319400"
+      phoneNumber="+5534996954962 "
       accountName="STIQUIFAR"
       avatar="/imagens/logo-stiquifar.png"
       statusMessage="Atendimento STIQUIFAR"
