@@ -1,0 +1,63 @@
+.botaoTopo {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 998;
+
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--gradiente-botao);
+  color: #ffffff;
+
+  font-size: 30px;
+  font-weight: 950;
+  line-height: 1;
+
+  cursor: pointer;
+  box-shadow: var(--sombra-botao);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px) scale(0.92);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.visivel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.botaoTopo:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 24px 48px rgba(217, 31, 56, 0.42);
+}
+
+:global(html[data-theme='light']) .botaoTopo {
+  box-shadow: 0 20px 42px rgba(197, 20, 45, 0.26);
+}
+
+:global(html[data-theme='light']) .botaoTopo:hover {
+  box-shadow: 0 24px 50px rgba(197, 20, 45, 0.32);
+}
+
+@media (max-width: 560px) {
+  .botaoTopo {
+    left: 18px;
+    bottom: 18px;
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+}

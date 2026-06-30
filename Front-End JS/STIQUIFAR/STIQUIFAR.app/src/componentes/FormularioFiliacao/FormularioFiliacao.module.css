@@ -3,8 +3,9 @@
   padding: 110px 0;
   background:
     radial-gradient(circle at 18% 8%, rgba(217, 31, 56, 0.08), transparent 30%),
-    linear-gradient(180deg, #151518 0%, #0b0b0d 100%);
+    var(--gradiente-section);
   overflow: hidden;
+  transition: background 0.28s ease;
 }
 
 .container {
@@ -21,7 +22,7 @@
 .cabecalho span {
   display: inline-flex;
   margin-bottom: 16px;
-  color: #ff3754;
+  color: var(--vermelho-vivo);
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 0.18em;
@@ -29,7 +30,7 @@
 }
 
 .cabecalho h2 {
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: clamp(36px, 5vw, 64px);
   line-height: 0.98;
   letter-spacing: -0.06em;
@@ -39,7 +40,7 @@
 .cabecalho p {
   max-width: 760px;
   margin: 20px auto 0;
-  color: #c9c0c4;
+  color: var(--texto-secundario);
   font-size: clamp(17px, 1.7vw, 21px);
   line-height: 1.6;
   font-weight: 500;
@@ -50,18 +51,23 @@
   margin: 0 auto;
   padding: 34px;
   border-radius: 34px;
-  border: 1px solid #2d2a2e;
-  background:
-    linear-gradient(180deg, rgba(217, 31, 56, 0.035), transparent 28%),
-    linear-gradient(180deg, #1b1b20 0%, #111114 100%);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
+  border: 1px solid var(--borda-forte);
+  background: var(--gradiente-card);
+  box-shadow: var(--sombra-card);
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .bloco {
   padding: 28px;
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.065);
+  border: 1px solid var(--borda);
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease;
 }
 
 .bloco + .bloco {
@@ -70,7 +76,7 @@
 
 .bloco h3 {
   margin-bottom: 22px;
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: 22px;
   line-height: 1.2;
   font-weight: 950;
@@ -93,7 +99,7 @@
 }
 
 .campo label {
-  color: #cfc7ca;
+  color: var(--texto-secundario);
   font-size: 13px;
   font-weight: 900;
 }
@@ -102,14 +108,23 @@
 .campo select,
 .campo textarea {
   width: 100%;
-  border: 1px solid #2d2a2e;
+  border: 1px solid var(--borda-forte);
   border-radius: 16px;
-  background: #111114;
-  color: #ffffff;
+  background: var(--fundo-card-secundario);
+  color: var(--texto-principal);
   padding: 15px 16px;
   outline: none;
   font-size: 15px;
-  transition: 0.22s ease;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    color 0.22s ease;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .campo textarea {
@@ -134,7 +149,7 @@
 }
 
 .perguntaClube p {
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: 17px;
   font-weight: 900;
   line-height: 1.4;
@@ -161,16 +176,21 @@
   justify-content: center;
   padding: 13px 24px;
   border-radius: 999px;
-  border: 1px solid #2d2a2e;
-  background: #151518;
-  color: #ffffff;
+  border: 1px solid var(--borda-forte);
+  background: var(--fundo-card);
+  color: var(--texto-principal);
   font-weight: 900;
-  transition: 0.22s ease;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .opcoesRadio input:checked + span {
-  background: linear-gradient(180deg, #d91f38, #9e1024);
+  background: var(--gradiente-botao);
   border-color: rgba(217, 31, 56, 0.72);
+  color: #ffffff;
   box-shadow: 0 16px 34px rgba(217, 31, 56, 0.24);
 }
 
@@ -184,7 +204,7 @@
 }
 
 .termosCepes p {
-  color: #d8d0d3;
+  color: var(--texto-secundario);
   font-size: 14px;
   line-height: 1.7;
   font-weight: 500;
@@ -202,12 +222,12 @@
   width: 18px;
   height: 18px;
   margin-top: 3px;
-  accent-color: #d91f38;
+  accent-color: var(--vermelho);
   cursor: pointer;
 }
 
 .checkTermos span {
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: 14px;
   line-height: 1.6;
   font-weight: 800;
@@ -220,11 +240,11 @@
   background:
     linear-gradient(90deg, rgba(217, 31, 56, 0.09), transparent 50%),
     rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--borda);
 }
 
 .encerramento p {
-  color: #ded6d9;
+  color: var(--texto-secundario);
   font-size: 16px;
   line-height: 1.75;
   font-weight: 500;
@@ -232,7 +252,7 @@
 
 .encerramento strong {
   display: block;
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: 17px;
   line-height: 1.6;
   font-weight: 950;
@@ -247,12 +267,15 @@
   cursor: pointer;
   border-radius: 999px;
   padding: 18px 28px;
-  background: linear-gradient(180deg, #d91f38, #9e1024);
+  background: var(--gradiente-botao);
   color: #ffffff;
   font-size: 17px;
   font-weight: 950;
-  box-shadow: 0 22px 46px rgba(217, 31, 56, 0.28);
-  transition: 0.25s ease;
+  box-shadow: var(--sombra-botao);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
 
 .botao:hover {
@@ -288,6 +311,62 @@
 .info {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* ===== TEMA CLARO ===== */
+
+:global(html[data-theme='light']) .formularioSection {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(197, 20, 45, 0.1), transparent 30%),
+    var(--gradiente-section);
+}
+
+:global(html[data-theme='light']) .formulario {
+  background: var(--gradiente-card);
+  box-shadow: 0 24px 60px rgba(86, 32, 38, 0.12);
+}
+
+:global(html[data-theme='light']) .bloco {
+  background: rgba(255, 255, 255, 0.58);
+}
+
+:global(html[data-theme='light']) .campo input,
+:global(html[data-theme='light']) .campo select,
+:global(html[data-theme='light']) .campo textarea {
+  background: #ffffff;
+  color: #181214;
+  border-color: rgba(45, 22, 27, 0.16);
+}
+
+:global(html[data-theme='light']) .campo input::placeholder,
+:global(html[data-theme='light']) .campo textarea::placeholder {
+  color: rgba(24, 18, 20, 0.42);
+}
+
+:global(html[data-theme='light']) .perguntaClube {
+  background:
+    linear-gradient(90deg, rgba(197, 20, 45, 0.08), transparent 48%),
+    rgba(255, 255, 255, 0.58);
+}
+
+:global(html[data-theme='light']) .opcoesRadio span {
+  background: #ffffff;
+}
+
+:global(html[data-theme='light']) .termosCepes {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+:global(html[data-theme='light']) .encerramento {
+  background:
+    linear-gradient(90deg, rgba(197, 20, 45, 0.08), transparent 50%),
+    rgba(255, 255, 255, 0.58);
+}
+
+:global(html[data-theme='light']) .info {
+  background: rgba(24, 18, 20, 0.06);
+  border: 1px solid rgba(24, 18, 20, 0.12);
+  color: #181214;
 }
 
 @keyframes aparecerTermos {

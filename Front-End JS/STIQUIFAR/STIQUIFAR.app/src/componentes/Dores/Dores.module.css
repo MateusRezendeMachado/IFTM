@@ -1,8 +1,9 @@
 .dores {
   position: relative;
   padding: 100px 0;
-  background: linear-gradient(180deg, #0b0b0d 0%, #151518 100%);
+  background: var(--gradiente-section);
   overflow: hidden;
+  transition: background 0.28s ease;
 }
 
 .container {
@@ -21,7 +22,7 @@
 }
 
 .cabecalho h2 {
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: clamp(34px, 4.8vw, 58px);
   line-height: 1;
   letter-spacing: -0.055em;
@@ -31,7 +32,7 @@
 .cabecalho p {
   max-width: 720px;
   margin: 20px auto 0;
-  color: #c9c0c4;
+  color: var(--texto-secundario);
   font-size: clamp(17px, 1.7vw, 21px);
   line-height: 1.6;
   font-weight: 500;
@@ -56,20 +57,16 @@
   align-items: center;
   min-height: 390px;
 
-  /* ALTERADO: transição mais suave e duração maior */
   transition:
     opacity 0.6s ease,
     transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform, opacity;
 }
 
-/* ALTERADO: opacidade maior, sem blur */
 .trocando {
   opacity: 0.6;
-  /* filter: blur(1.8px); removido */
 }
 
-/* ALTERADO: deslocamento maior para suavizar */
 .trocando.proximo {
   transform: translateX(-60px) scale(0.985);
 }
@@ -83,19 +80,24 @@
   min-height: 320px;
   padding: 58px 34px 34px;
   border-radius: 30px;
-  background: linear-gradient(180deg, #1b1b20 0%, #111114 100%);
-  border: 1px solid #2d2a2e;
+  background: var(--gradiente-card);
+  border: 1px solid var(--borda-forte);
+  box-shadow: var(--sombra-card);
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
 
-  transition: 0.35s ease;
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    transform 0.35s ease;
 }
 
 .card h3 {
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: 25px;
   line-height: 1.15;
   font-weight: 950;
@@ -105,7 +107,7 @@
 
 .card p {
   margin-top: 26px;
-  color: #f0e8eb;
+  color: var(--texto-principal);
   font-size: 17px;
   line-height: 1.75;
   font-weight: 600;
@@ -116,8 +118,8 @@
   transform: scale(1.05);
   background:
     linear-gradient(180deg, rgba(217, 31, 56, 0.035), transparent 38%),
-    linear-gradient(180deg, #1c1c21 0%, #121215 100%);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+    var(--gradiente-card);
+  box-shadow: var(--sombra-card);
   z-index: 2;
 }
 
@@ -126,7 +128,7 @@
 }
 
 .principal p {
-  color: #ffffff;
+  color: var(--texto-principal);
   font-size: 18px;
 }
 
@@ -139,21 +141,26 @@
 .seta {
   width: 58px;
   height: 58px;
-  border: 1px solid #2d2a2e;
+  border: 1px solid var(--borda-forte);
   border-radius: 50%;
-  background-color: #18181c;
-  color: #ffffff;
+  background: var(--fundo-card);
+  color: var(--texto-principal);
   cursor: pointer;
   font-size: 42px;
   line-height: 1;
   display: grid;
   place-items: center;
-  transition: 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .seta:hover {
-  background-color: #d91f38;
-  border-color: #d91f38;
+  background: var(--vermelho);
+  border-color: var(--vermelho);
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -164,12 +171,10 @@
 }
 
 .carregando {
-  color: #ffffff;
+  color: var(--texto-principal);
   text-align: center;
   font-weight: 800;
 }
-
-/* Efeito ao rolar até a seção */
 
 .visivel .cabecalho {
   opacity: 1;
@@ -213,6 +218,41 @@
     transform: scale(0.9) translateY(0);
     filter: blur(1.1px);
   }
+}
+
+/* ===== TEMA CLARO ===== */
+
+:global(html[data-theme='light']) .dores {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(197, 20, 45, 0.08), transparent 30%),
+    var(--gradiente-section);
+}
+
+:global(html[data-theme='light']) .card {
+  background: var(--gradiente-card);
+  box-shadow: 0 24px 60px rgba(86, 32, 38, 0.12);
+}
+
+:global(html[data-theme='light']) .principal {
+  background:
+    linear-gradient(180deg, rgba(197, 20, 45, 0.06), transparent 40%),
+    var(--gradiente-card);
+  box-shadow: 0 28px 70px rgba(86, 32, 38, 0.15);
+}
+
+:global(html[data-theme='light']) .lateral {
+  opacity: 0.55;
+  filter: blur(0.8px);
+}
+
+:global(html[data-theme='light']) .seta {
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(86, 32, 38, 0.10);
+}
+
+:global(html[data-theme='light']) .seta:hover {
+  background: var(--vermelho);
+  color: #ffffff;
 }
 
 /* Responsivo */
@@ -263,6 +303,16 @@
 
   .container {
     width: min(100%, calc(100% - 28px));
+  }
+
+  .cabecalho h2 {
+    font-size: clamp(34px, 11vw, 48px);
+    line-height: 1.03;
+  }
+
+  .cabecalho p {
+    font-size: 16px;
+    line-height: 1.55;
   }
 
   .carrossel {

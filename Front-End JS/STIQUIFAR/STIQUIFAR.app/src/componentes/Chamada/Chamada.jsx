@@ -13,11 +13,12 @@ function Chamada() {
           </h1>
 
           <p>
-            Fortaleça-se com o STIQUIFAR
+            Fortaleça-se com o STIQUIFAR  
+            
           </p>
 
-          <a href="#filiacao" className={styles.botao}>
-            Filiar-se
+          <a href="#duvidas" className={styles.botao}>
+            Fale com o STIQUIFAR
           </a>
         </div>
       </div>

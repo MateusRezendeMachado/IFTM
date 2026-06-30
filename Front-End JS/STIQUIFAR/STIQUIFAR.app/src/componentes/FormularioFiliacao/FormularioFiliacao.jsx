@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import {
-  validarFormularioFiliacao,
-  verificarCepExistente,
-  formatarCPF,
-  formatarCEP,
-  formatarTelefone,
-  formatarSalario
-} from '../../utils/validacoesFormulario';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import styles from './FormularioFiliacao.module.css';
 
 function FormularioFiliacao() {
@@ -15,27 +9,12 @@ function FormularioFiliacao() {
   const TEMPLATE_ID = 'template_fkrgy5g';
   const PUBLIC_KEY = 'DQlRoRx3RgJhiQJw7';
 
-  const dataMaxima = new Date().toISOString().split('T')[0];
 
   const estadoInicial = {
-    nomeCompleto: '',
-    cpf: '',
-    rg: '',
-    dataNascimento: '',
-    estadoCivil: '',
-    endereco: '',
-    bairro: '',
-    cidade: '',
-    cep: '',
-    telefone: '',
+    nome: '',
     email: '',
-    empresa: '',
-    cargo: '',
-    salario: '',
-    clubeCepes: '',
-    aceitouTermosCepes: false,
-    dependentes: '',
-    observacoes: ''
+    telefone: '',
+    duvida: ''
   };
 
   const [form, setForm] = useState(estadoInicial);
@@ -43,37 +22,83 @@ function FormularioFiliacao() {
   const [tipoMensagem, setTipoMensagem] = useState('');
   const [enviando, setEnviando] = useState(false);
 
+  function somenteNumeros(valor) {
+    return String(valor || '').replace(/\D/g, '');
+  }
+
+  function formatarTelefone(valor) {
+    const numeros = somenteNumeros(valor).slice(0, 11);
+
+    if (!numeros) {
+      return '';
+    }
+
+    if (numeros.length <= 2) {
+      return `(${numeros}`;
+    }
+
+    if (numeros.length <= 6) {
+      return `(${numeros.slice(0, 2)}) ${numeros.slice(2)}`;
+    }
+
+    if (numeros.length <= 10) {
+      return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
+    }
+
+    return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
+  }
+
+  function validarEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
+  }
+
+  function validarTelefone(telefone) {
+    const numeros = somenteNumeros(telefone);
+
+    if (numeros.length !== 10 && numeros.length !== 11) {
+      return false;
+    }
+
+    const ddd = Number(numeros.slice(0, 2));
+
+    if (ddd < 11 || ddd > 99) {
+      return false;
+    }
+
+    if (/^(\d)\1+$/.test(numeros)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function validarFormulario() {
+    if (!form.nome.trim()) {
+      return 'Informe seu nome.';
+    }
+
+    if (!validarEmail(form.email)) {
+      return 'Informe um e-mail válido.';
+    }
+
+    if (!validarTelefone(form.telefone)) {
+      return 'Informe um telefone válido com DDD.';
+    }
+
+    if (!form.duvida.trim()) {
+      return 'Digite sua dúvida ou mensagem.';
+    }
+
+    return '';
+  }
+
   function alterarForm(evento) {
-    const { name, value, type, checked } = evento.target;
+    const { name, value } = evento.target;
 
-    if (name === 'clubeCepes' && value === 'Não') {
-      setForm({
-        ...form,
-        clubeCepes: value,
-        aceitouTermosCepes: false
-      });
-
-      setMensagem('');
-      setTipoMensagem('');
-      return;
-    }
-
-    let valorFinal = type === 'checkbox' ? checked : value;
-
-    if (name === 'cpf') {
-      valorFinal = formatarCPF(value);
-    }
-
-    if (name === 'cep') {
-      valorFinal = formatarCEP(value);
-    }
+    let valorFinal = value;
 
     if (name === 'telefone') {
       valorFinal = formatarTelefone(value);
-    }
-
-    if (name === 'salario') {
-      valorFinal = formatarSalario(value);
     }
 
     setForm({
@@ -87,73 +112,57 @@ function FormularioFiliacao() {
 
   function montarMensagemEmail() {
     return `
-DADOS PESSOAIS
-Nome completo: ${form.nomeCompleto}
-CPF: ${form.cpf}
-RG: ${form.rg || 'Não informado'}
-Data de nascimento: ${form.dataNascimento}
-Estado civil: ${form.estadoCivil}
+NOVA MENSAGEM RECEBIDA PELA LANDING PAGE STIQUIFAR
 
-ENDEREÇO E CONTATO
-Endereço completo: ${form.endereco}
-Bairro: ${form.bairro}
-Cidade: ${form.cidade}
-CEP: ${form.cep}
-Telefone/WhatsApp: ${form.telefone}
+Nome: ${form.nome}
 E-mail: ${form.email}
+Telefone/WhatsApp: ${form.telefone}
 
-DADOS PROFISSIONAIS
-Empresa: ${form.empresa}
-Cargo/Função: ${form.cargo}
-Salário: ${form.salario}
-
-CLUBE RECREATIVO CEPES STIQUIFAR
-Gostaria de também ser Sócio do Clube CEPES?: ${form.clubeCepes}
-Aceitou os termos do CEPES?: ${
-      form.clubeCepes === 'Sim'
-        ? form.aceitouTermosCepes
-          ? 'Sim'
-          : 'Não'
-        : 'Não se aplica'
-    }
-
-INFORMAÇÕES OPCIONAIS
-Dependentes: ${form.dependentes || 'Não informado'}
-
-Observações complementares:
-${form.observacoes || 'Não informado'}
+Dúvida/Mensagem:
+${form.duvida}
     `;
+  }
+
+  function configuracaoSwal() {
+    return {
+      customClass: {
+        popup: 'swal-stiquifar',
+        title: 'swal-titulo-stiquifar',
+        htmlContainer: 'swal-texto-stiquifar',
+        confirmButton: 'swal-botao-stiquifar',
+        cancelButton: 'swal-botao-cancelar-stiquifar',
+        actions: 'swal-acoes-stiquifar'
+      },
+      buttonsStyling: false
+    };
   }
 
   async function enviarFormulario(evento) {
     evento.preventDefault();
 
-    const erroValidacao = validarFormularioFiliacao(form);
+    const erroValidacao = validarFormulario();
 
     if (erroValidacao) {
       setMensagem(erroValidacao);
       setTipoMensagem('erro');
+
+      Swal.fire({
+        ...configuracaoSwal(),
+        icon: 'error',
+        title: 'Atenção',
+        text: erroValidacao,
+        confirmButtonText: 'Corrigir'
+      });
+
       return;
     }
 
     setEnviando(true);
-    setMensagem('Validando CEP...');
-    setTipoMensagem('info');
-
-    const resultadoCep = await verificarCepExistente(form.cep);
-
-    if (!resultadoCep.valido) {
-      setMensagem(resultadoCep.mensagem);
-      setTipoMensagem('erro');
-      setEnviando(false);
-      return;
-    }
-
-    setMensagem('Enviando solicitação...');
+    setMensagem('Enviando mensagem...');
     setTipoMensagem('info');
 
     const dadosEmail = {
-      name: form.nomeCompleto,
+      name: form.nome,
       email: form.email,
       phone: form.telefone,
       time: new Date().toLocaleString('pt-BR'),
@@ -163,348 +172,115 @@ ${form.observacoes || 'Não informado'}
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, dadosEmail, PUBLIC_KEY);
 
-      setMensagem(
-        'Solicitação enviada com sucesso! Em breve entraremos em contato.'
-      );
+      setMensagem('Mensagem enviada com sucesso! Em breve entraremos em contato.');
       setTipoMensagem('sucesso');
-
       setForm(estadoInicial);
-    } catch (erro) {
-      console.error('Erro ao enviar formulário:', erro);
 
-      setMensagem(
-        'Não foi possível enviar a solicitação. Tente novamente em alguns instantes.'
-      );
+      await Swal.fire({
+        ...configuracaoSwal(),
+        icon: 'success',
+        title: 'Mensagem enviada!',
+        html: `
+        <strong>Sua mensagem foi enviada com sucesso.</strong>
+        <br />
+        <span>Em breve o STIQUIFAR entrará em contato.</span>
+      `,
+        confirmButtonText: 'Fechar',
+        draggable: true
+      });
+
+    } catch (erro) {
+      console.error('Erro ao enviar mensagem:', erro);
+
+      setMensagem('Não foi possível enviar a mensagem. Tente novamente em alguns instantes.');
       setTipoMensagem('erro');
+
+      Swal.fire({
+        ...configuracaoSwal(),
+        icon: 'error',
+        title: 'Erro ao enviar',
+        text: 'Não foi possível enviar a mensagem. Tente novamente em alguns instantes.',
+        confirmButtonText: 'Entendi'
+      });
+
     } finally {
       setEnviando(false);
     }
   }
 
   return (
-    <section className={styles.formularioSection} id="filiacao">
+    <section className={styles.formularioSection} id="duvidas">
       <div className={styles.container}>
         <div className={styles.cabecalho}>
-          <span>Filiação</span>
+          <span>Fale com o sindicato</span>
 
-          <h2>Formulário de filiação STIQUIFAR</h2>
+          <h2>Tem alguma dúvida?</h2>
 
           <p>
-            Preencha seus dados para iniciar o processo de filiação. As
-            informações serão utilizadas para contato e encaminhamento da
-            solicitação.
+            Envie uma mensagem rápida para o STIQUIFAR. Nossa equipe entrará em
+            contato para orientar você da melhor forma.
           </p>
         </div>
 
         <form className={styles.formulario} onSubmit={enviarFormulario}>
-          <div className={styles.bloco}>
-            <h3>Dados pessoais</h3>
-
-            <div className={styles.grid}>
-              <div className={`${styles.campo} ${styles.completo}`}>
-                <label htmlFor="nomeCompleto">Nome completo *</label>
-                <input
-                  type="text"
-                  id="nomeCompleto"
-                  name="nomeCompleto"
-                  value={form.nomeCompleto}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="cpf">CPF *</label>
-                <input
-                  type="text"
-                  id="cpf"
-                  name="cpf"
-                  value={form.cpf}
-                  onChange={alterarForm}
-                  inputMode="numeric"
-                  maxLength="14"
-                  placeholder="000.000.000-00"
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="rg">RG</label>
-                <input
-                  type="text"
-                  id="rg"
-                  name="rg"
-                  value={form.rg}
-                  onChange={alterarForm}
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="dataNascimento">Data de nascimento *</label>
-                <input
-                  type="date"
-                  id="dataNascimento"
-                  name="dataNascimento"
-                  value={form.dataNascimento}
-                  onChange={alterarForm}
-                  min="1900-01-01"
-                  max={dataMaxima}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="estadoCivil">Estado civil *</label>
-                <select
-                  id="estadoCivil"
-                  name="estadoCivil"
-                  value={form.estadoCivil}
-                  onChange={alterarForm}
-                  required
-                >
-                  <option value="">Selecione</option>
-                  <option value="Solteiro(a)">Solteiro(a)</option>
-                  <option value="Casado(a)">Casado(a)</option>
-                  <option value="Divorciado(a)">Divorciado(a)</option>
-                  <option value="Viúvo(a)">Viúvo(a)</option>
-                  <option value="União estável">União estável</option>
-                </select>
-              </div>
+          <div className={styles.grid}>
+            <div className={styles.campo}>
+              <label htmlFor="nome">Nome *</label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                value={form.nome}
+                onChange={alterarForm}
+                placeholder="Digite seu nome"
+                required
+              />
             </div>
-          </div>
 
-          <div className={styles.bloco}>
-            <h3>Endereço e contato</h3>
-
-            <div className={styles.grid}>
-              <div className={`${styles.campo} ${styles.completo}`}>
-                <label htmlFor="endereco">Endereço completo *</label>
-                <input
-                  type="text"
-                  id="endereco"
-                  name="endereco"
-                  value={form.endereco}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="bairro">Bairro *</label>
-                <input
-                  type="text"
-                  id="bairro"
-                  name="bairro"
-                  value={form.bairro}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="cidade">Cidade *</label>
-                <input
-                  type="text"
-                  id="cidade"
-                  name="cidade"
-                  value={form.cidade}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="cep">CEP *</label>
-                <input
-                  type="text"
-                  id="cep"
-                  name="cep"
-                  value={form.cep}
-                  onChange={alterarForm}
-                  inputMode="numeric"
-                  maxLength="9"
-                  placeholder="00000-000"
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="telefone">Telefone *</label>
-                <input
-                  type="tel"
-                  id="telefone"
-                  name="telefone"
-                  value={form.telefone}
-                  onChange={alterarForm}
-                  inputMode="numeric"
-                  maxLength="15"
-                  placeholder="(00) 00000-0000"
-                  required
-                />
-              </div>
-
-              <div className={`${styles.campo} ${styles.completo}`}>
-                <label htmlFor="email">E-mail *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={form.email}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
+            <div className={styles.campo}>
+              <label htmlFor="email">E-mail *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={form.email}
+                onChange={alterarForm}
+                placeholder="seuemail@exemplo.com"
+                required
+              />
             </div>
-          </div>
 
-          <div className={styles.bloco}>
-            <h3>Dados profissionais</h3>
-
-            <div className={styles.grid}>
-              <div className={styles.campo}>
-                <label htmlFor="empresa">Empresa *</label>
-                <input
-                  type="text"
-                  id="empresa"
-                  name="empresa"
-                  value={form.empresa}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="cargo">Cargo / Função *</label>
-                <input
-                  type="text"
-                  id="cargo"
-                  name="cargo"
-                  value={form.cargo}
-                  onChange={alterarForm}
-                  required
-                />
-              </div>
-
-              <div className={styles.campo}>
-                <label htmlFor="salario">Salário *</label>
-                <input
-                  type="text"
-                  id="salario"
-                  name="salario"
-                  value={form.salario}
-                  onChange={alterarForm}
-                  inputMode="numeric"
-                  placeholder="R$ 0,00"
-                  required
-                />
-              </div>
+            <div className={`${styles.campo} ${styles.completo}`}>
+              <label htmlFor="telefone">Telefone / WhatsApp *</label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                value={form.telefone}
+                onChange={alterarForm}
+                inputMode="numeric"
+                maxLength="15"
+                placeholder="(00) 00000-0000"
+                required
+              />
             </div>
-          </div>
 
-          <div className={styles.bloco}>
-            <h3>Associação ao Clube Recreativo CEPES STIQUIFAR</h3>
-
-            <div className={styles.perguntaClube}>
-              <p>Gostaria de também ser Sócio do Clube CEPES? *</p>
-
-              <div className={styles.opcoesRadio}>
-                <label>
-                  <input
-                    type="radio"
-                    name="clubeCepes"
-                    value="Sim"
-                    checked={form.clubeCepes === 'Sim'}
-                    onChange={alterarForm}
-                    required
-                  />
-                  <span>Sim</span>
-                </label>
-
-                <label>
-                  <input
-                    type="radio"
-                    name="clubeCepes"
-                    value="Não"
-                    checked={form.clubeCepes === 'Não'}
-                    onChange={alterarForm}
-                    required
-                  />
-                  <span>Não</span>
-                </label>
-              </div>
-
-              {form.clubeCepes === 'Sim' && (
-                <div className={styles.termosCepes}>
-                  <p>
-                    A adesão ao Clube Recreativo CEPES está sujeita à cobrança
-                    de mensalidade específica, acrescida ao valor da contribuição
-                    correspondente ao plano escolhido.
-                  </p>
-
-                  <label className={styles.checkTermos}>
-                    <input
-                      type="checkbox"
-                      name="aceitouTermosCepes"
-                      checked={form.aceitouTermosCepes}
-                      onChange={alterarForm}
-                      required={form.clubeCepes === 'Sim'}
-                    />
-
-                    <span>
-                      Li e concordo com os termos de associação ao Clube
-                      Recreativo CEPES STIQUIFAR.
-                    </span>
-                  </label>
-                </div>
-              )}
+            <div className={`${styles.campo} ${styles.completo}`}>
+              <label htmlFor="duvida">Sua dúvida *</label>
+              <textarea
+                id="duvida"
+                name="duvida"
+                value={form.duvida}
+                onChange={alterarForm}
+                rows="6"
+                placeholder="Digite sua dúvida ou mensagem..."
+                required
+              ></textarea>
             </div>
-          </div>
-
-          <div className={styles.bloco}>
-            <h3>Informações opcionais</h3>
-
-            <div className={styles.grid}>
-              <div className={`${styles.campo} ${styles.completo}`}>
-                <label htmlFor="dependentes">Dependentes</label>
-                <textarea
-                  id="dependentes"
-                  name="dependentes"
-                  value={form.dependentes}
-                  onChange={alterarForm}
-                  rows="4"
-                  placeholder="Informe nome, parentesco e idade, se desejar."
-                ></textarea>
-              </div>
-
-              <div className={`${styles.campo} ${styles.completo}`}>
-                <label htmlFor="observacoes">Observações complementares</label>
-                <textarea
-                  id="observacoes"
-                  name="observacoes"
-                  value={form.observacoes}
-                  onChange={alterarForm}
-                  rows="4"
-                  placeholder="Digite alguma informação adicional, se necessário."
-                ></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.encerramento}>
-            <p>
-              Ao se filiar ao STIQUIFAR, você fortalece a representação da
-              categoria e passa a ter acesso aos benefícios, convênios,
-              oportunidades e serviços oferecidos pelo sindicato.
-            </p>
-
-            <strong>
-              Juntos somos mais fortes na defesa dos direitos e na construção de
-              novas conquistas para os trabalhadores.
-            </strong>
           </div>
 
           <button type="submit" className={styles.botao} disabled={enviando}>
-            {enviando ? 'Enviando...' : 'Enviar solicitação de filiação'}
+            {enviando ? 'Enviando...' : 'Enviar mensagem'}
           </button>
 
           {mensagem && (

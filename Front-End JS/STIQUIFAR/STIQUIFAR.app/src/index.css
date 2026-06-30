@@ -1,5 +1,112 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* ============================= */
+/* VARIÁVEIS DO TEMA ESCURO */
+/* ============================= */
+
+:root {
+  --fundo-principal: #0b0b0d;
+  --fundo-secundario: #111114;
+  --fundo-section: #151518;
+  --fundo-card: #1b1b20;
+  --fundo-card-secundario: #111114;
+
+  --texto-principal: #f5eff1;
+  --texto-secundario: #c9c0c4;
+  --texto-suave: #8f858a;
+
+  --vermelho: #d91f38;
+  --vermelho-vivo: #f80529;
+  --vermelho-escuro: #9e1024;
+
+  --borda: rgba(255, 255, 255, 0.09);
+  --borda-forte: #2d2a2e;
+
+  --sombra-card: 0 28px 70px rgba(0, 0, 0, 0.38);
+  --sombra-botao: 0 22px 46px rgba(217, 31, 56, 0.28);
+
+  --gradiente-body: radial-gradient(circle at 20% 30%, #141418, #0b0b0d 80%);
+
+  --gradiente-section:
+    radial-gradient(circle at 18% 8%, rgba(217, 31, 56, 0.08), transparent 30%),
+    linear-gradient(180deg, #151518 0%, #0b0b0d 100%);
+
+  --gradiente-card:
+    linear-gradient(180deg, rgba(217, 31, 56, 0.035), transparent 28%),
+    linear-gradient(180deg, #1b1b20 0%, #111114 100%);
+
+  --gradiente-botao: linear-gradient(180deg, #d91f38, #9e1024);
+
+  --divisor-section: linear-gradient(
+    90deg,
+    transparent,
+    rgba(217, 31, 56, 0.4),
+    transparent
+  );
+
+  --scrollbar-track: #1a1a1e;
+  --scrollbar-thumb: #3a3a40;
+  --scrollbar-thumb-hover: #d91f38;
+}
+
+/* ============================= */
+/* VARIÁVEIS DO TEMA CLARO */
+/* ============================= */
+
+html[data-theme='light'] {
+  --fundo-principal: #f7f1ee;
+  --fundo-secundario: #fffaf8;
+  --fundo-section: #fff4f1;
+  --fundo-card: #ffffff;
+  --fundo-card-secundario: #fff7f5;
+
+  --texto-principal: #181214;
+  --texto-secundario: #5d5256;
+  --texto-suave: #85797d;
+
+  --vermelho: #c5142d;
+  --vermelho-vivo: #e60023;
+  --vermelho-escuro: #970e21;
+
+  --borda: rgba(45, 22, 27, 0.12);
+  --borda-forte: rgba(45, 22, 27, 0.18);
+
+  --sombra-card: 0 24px 60px rgba(86, 32, 38, 0.13);
+  --sombra-botao: 0 20px 40px rgba(197, 20, 45, 0.24);
+
+  --gradiente-body:
+    radial-gradient(circle at 18% 18%, rgba(217, 31, 56, 0.13), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgba(255, 210, 200, 0.9), transparent 34%),
+    linear-gradient(180deg, #fffaf8 0%, #f7f1ee 100%);
+
+  --gradiente-section:
+    radial-gradient(circle at 18% 8%, rgba(197, 20, 45, 0.1), transparent 30%),
+    linear-gradient(180deg, #fffaf8 0%, #f7f1ee 100%);
+
+  --gradiente-card:
+    linear-gradient(180deg, rgba(197, 20, 45, 0.045), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, #fff7f5 100%);
+
+  --gradiente-botao: linear-gradient(180deg, #e60023, #a20d23);
+
+  --divisor-section: linear-gradient(
+    90deg,
+    transparent,
+    rgba(197, 20, 45, 0.42),
+    rgba(45, 22, 27, 0.12),
+    rgba(197, 20, 45, 0.42),
+    transparent
+  );
+
+  --scrollbar-track: #efe4e1;
+  --scrollbar-thumb: #c9b8b4;
+  --scrollbar-thumb-hover: #c5142d;
+}
+
+/* ============================= */
+/* RESET GERAL */
+/* ============================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,7 +115,7 @@
 
 html {
   scroll-behavior: smooth;
-} 
+}
 
 html,
 body,
@@ -21,19 +128,26 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  /* Fundo agora com um gradiente muito sutil para dar profundidade */
-  background: radial-gradient(circle at 20% 30%, #141418, #0b0b0d 80%);
-  color: #f5eff1;
+
+  background: var(--gradiente-body);
+  background-attachment: fixed;
+
+  color: var(--texto-principal);
   overflow-x: hidden;
-  /* Melhor legibilidade e espaçamento geral */
   line-height: 1.7;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  transition:
+    background 0.28s ease,
+    color 0.28s ease;
 }
 
+/* ============================= */
+/* LINKS */
+/* ============================= */
 
-
-/* Links com transição suave e cor de destaque */
 a {
   color: inherit;
   text-decoration: none;
@@ -41,19 +155,31 @@ a {
 }
 
 a:hover {
-  color: #d91f38; /* vermelho elegante que já está nos divisores */
+  color: var(--vermelho);
 }
 
-/* Headings com tipografia mais marcante e espaçamento adequado */
-h1, h2, h3, h4, h5, h6 {
+/* ============================= */
+/* TÍTULOS */
+/* ============================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Oswald', 'Inter', sans-serif;
-  font-weight: 500; /* peso médio para elegância */
+  font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1.2;
   margin-bottom: 0.5em;
+  color: var(--texto-principal);
 }
 
-/* Botões, inputs, etc. herdam a fonte */
+/* ============================= */
+/* FORMULÁRIOS E BOTÕES */
+/* ============================= */
+
 button,
 input,
 select,
@@ -61,10 +187,17 @@ textarea {
   font-family: inherit;
 }
 
-/* Divisores entre seções mais refinados */
+main {
+  width: 100%;
+}
+
+/* ============================= */
+/* DIVISORES ENTRE SEÇÕES */
+/* ============================= */
+
 section:not(:first-of-type) {
   position: relative;
-  padding-top: 3rem; /* mais espaço antes do divisor */
+  padding-top: 3rem;
 }
 
 section:not(:first-of-type)::before {
@@ -73,29 +206,196 @@ section:not(:first-of-type)::before {
   top: 0;
   left: 10%;
   width: 80%;
-  height: 1px; /* mais fino */
-  background: linear-gradient(90deg, transparent, rgba(217, 31, 56, 0.4), transparent);
+  height: 1px;
+  background: var(--divisor-section);
   border-radius: 999px;
-  box-shadow: 0 0 8px rgba(217, 31, 56, 0.15); /* brilho sutil */
+  box-shadow: 0 0 8px rgba(217, 31, 56, 0.15);
 }
 
-/* Personalização da scrollbar para combinar com o tema escuro */
+html[data-theme='light'] section:not(:first-of-type)::before {
+  box-shadow: 0 0 10px rgba(197, 20, 45, 0.12);
+}
+
+/* ============================= */
+/* SCROLLBAR */
+/* ============================= */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1e;
+  background: var(--scrollbar-track);
   border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3a3a40;
+  background: var(--scrollbar-thumb);
   border-radius: 8px;
   transition: background 0.2s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d91f38;
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ============================= */
+/* SWEETALERT2 - TEMA STIQUIFAR */
+/* ============================= */
+
+.swal2-popup.swal-stiquifar {
+  border-radius: 30px !important;
+  border: 1px solid var(--borda-forte) !important;
+  background: var(--gradiente-card) !important;
+  color: var(--texto-principal) !important;
+  box-shadow: var(--sombra-card) !important;
+  padding: 34px 32px !important;
+}
+
+.swal2-title.swal-titulo-stiquifar {
+  color: var(--texto-principal) !important;
+  font-family: 'Oswald', 'Inter', sans-serif !important;
+  font-size: 34px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.swal2-html-container.swal-texto-stiquifar {
+  color: var(--texto-secundario) !important;
+  font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.6 !important;
+}
+
+.swal2-confirm.swal-botao-stiquifar {
+  border-radius: 999px !important;
+  padding: 12px 28px !important;
+  background: var(--gradiente-botao) !important;
+  color: #ffffff !important;
+  font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+  font-weight: 950 !important;
+  box-shadow: var(--sombra-botao) !important;
+}
+
+.swal2-confirm.swal-botao-stiquifar:focus {
+  box-shadow:
+    0 0 0 4px rgba(217, 31, 56, 0.18),
+    var(--sombra-botao) !important;
+}
+
+.swal2-icon.swal2-error {
+  border-color: var(--vermelho) !important;
+  color: var(--vermelho) !important;
+}
+
+.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+  background-color: var(--vermelho) !important;
+}
+
+.swal2-icon.swal2-success {
+  border-color: #0bbf4f !important;
+  color: #0bbf4f !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(11, 191, 79, 0.32) !important;
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #0bbf4f !important;
+}
+
+.swal2-backdrop-show {
+  background: rgba(0, 0, 0, 0.62) !important;
+}
+
+html[data-theme='light'] .swal2-backdrop-show {
+  background: rgba(24, 18, 20, 0.32) !important;
+}
+
+html[data-theme='light'] .swal2-popup.swal-stiquifar {
+  box-shadow: 0 28px 70px rgba(86, 32, 38, 0.18) !important;
+}
+
+html[data-theme='light'] .swal2-html-container.swal-texto-stiquifar {
+  color: #5d5256 !important;
+}
+
+.swal2-actions.swal-acoes-stiquifar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin-top: 28px !important;
+}
+
+.swal2-confirm.swal-botao-stiquifar,
+.swal2-cancel.swal-botao-cancelar-stiquifar {
+  min-width: 150px !important;
+  border-radius: 999px !important;
+  padding: 13px 26px !important;
+  font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 950 !important;
+  cursor: pointer !important;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease !important;
+}
+
+.swal2-confirm.swal-botao-stiquifar {
+  border: 1px solid rgba(217, 31, 56, 0.65) !important;
+  background: var(--gradiente-botao) !important;
+  color: #ffffff !important;
+  box-shadow: var(--sombra-botao) !important;
+}
+
+.swal2-confirm.swal-botao-stiquifar:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 24px 48px rgba(217, 31, 56, 0.34) !important;
+}
+
+.swal2-cancel.swal-botao-cancelar-stiquifar {
+  border: 1px solid var(--borda-forte) !important;
+  background: rgba(255, 255, 255, 0.045) !important;
+  color: var(--texto-principal) !important;
+  box-shadow: none !important;
+}
+
+.swal2-cancel.swal-botao-cancelar-stiquifar:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(217, 31, 56, 0.42) !important;
+  background: rgba(217, 31, 56, 0.08) !important;
+  color: var(--texto-principal) !important;
+}
+
+.swal2-html-container.swal-texto-stiquifar strong {
+  color: var(--texto-principal) !important;
+  font-weight: 900 !important;
+}
+
+.swal2-html-container.swal-texto-stiquifar span {
+  display: inline-block !important;
+  margin-top: 6px !important;
+  color: var(--texto-secundario) !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 560px) {
+  .swal2-actions.swal-acoes-stiquifar {
+    width: 100% !important;
+    flex-direction: column-reverse !important;
+    gap: 12px !important;
+  }
+
+  .swal2-confirm.swal-botao-stiquifar,
+  .swal2-cancel.swal-botao-cancelar-stiquifar {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
 }
