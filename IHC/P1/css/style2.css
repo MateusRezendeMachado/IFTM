@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap');
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    color: var(--color-text);
+}
+
+:root {
+    /* Espaçamentos */
+    --internal-space: 10px;
+
+    --space-0: 0px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 80px;
+    --space-10: 96px;
+
+    /* Layout */
+    --max-width-container: 1250px;
+    --border-main-title: 25px;
+    --border-box: 10px;
+
+    /* Cores */
+    --bg-emphasis: rgb(241, 241, 241);
+    --color-text: #152660;
+    --color-buttons: #AF872D;
+
+    /* Cores dos cards */
+    --color-html: #e34f26;
+    --color-css:  #2965f1;
+    --color-js:   #d4b106;
+
+    /* Tamanho das fontes */
+    --font-subtitle2: 28px;
+    --font-paragraph: 16px;
+}
+
+body p {
+    font-size: var(--font-paragraph);
+}
+
+.container {
+    max-width: var(--max-width-container);
+    margin: auto;
+}
+
+/* Título principal */
+.title-section {
+    padding-block: var(--space-8) var(--space-6);
+    text-align: center;
+}
+
+.title-section h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+/* Section dos logos */
+.logos-section {
+    padding-block: var(--space-8);
+    background: var(--bg-emphasis);
+}
+
+.logos-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-9);
+    flex-wrap: wrap;
+}
+
+.logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.logo-item img {
+    width: 250px;
+    height: 200px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-item img:hover {
+    transform: scale(1.08);
+}
+
+.logo-item p {
+    font-size: var(--font-subtitle2);
+    font-weight: 800;
+    color: var(--color-text);
+    text-align: center;
+}
+
+.logos-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-9);
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-paragraph);
+    border-radius: var(--border-box);
+    padding: var(--space-4) var(--space-5);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.button--primary {
+    background: #1e3a8a;
+    color: #ffffff;
+}
+
+.button--primary:hover {
+    background: #355fe9;
+    transform: translateY(-2px);
+}
+
+/* Trilha / cards */
+.trilha {
+    padding-block: var(--space-8);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-top: 4px solid transparent;
+    border-radius: var(--border-box);
+    padding: var(--space-6);
+    box-shadow: 0 1px 3px rgba(21, 38, 96, 0.08);
+}
+
+.card--html { border-top-color: var(--color-html); }
+.card--css  { border-top-color: var(--color-css); }
+.card--js   { border-top-color: var(--color-js); }
+
+.card__icon {
+    width: 40px;
+    display: block;
+    margin: 0 auto var(--space-4);
+}
+
+
+
+.card p {
+    margin-bottom: var(--space-5);
+    text-align: left;
+}
+
+.card__topics {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    border-top: 1px solid #ececec;
+    padding-top: var(--space-4);
+}
+
+.card__topics li {
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+/* Destaque nas palavras-chave dos tópicos */
+.card__topics li strong {
+    color: var(--color-text);
+    font-weight: 800;
+}
+
+/* Marcador colorido por card (varredura por cor) */
+.card__topics li::before {
+    content: "▸";
+    color: var(--color-buttons);
+    font-weight: 800;
+    margin-right: var(--space-2);
+}
+
+.card--html .card__topics li::before { color: var(--color-html); }
+.card--css  .card__topics li::before { color: var(--color-css); }
+.card--js   .card__topics li::before { color: var(--color-js); }
+
+/* Footer */
+.site-footer {
+    background: var(--color-text);
+    padding-block: var(--space-6);
+}
+
+.site-footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.site-footer p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    text-align: center;
+}
