@@ -29,7 +29,7 @@ const catalogo = [
   { titulo: "Admirável Mundo Novo", autor: "Aldous Huxley", isbn: "9788508045228", ano: 1932 },
   { titulo: "Fahrenheit 451", autor: "Ray Bradbury", isbn: "9788525425423", ano: 1953 },
   { titulo: "O Pequeno Príncipe", autor: "Antoine de Saint-Exupéry", isbn: "9788522031412", ano: 1943 },
-  { titulo: "Crimem e Castigo", autor: "Fiódor Dostoiévski", isbn: "9788573266467", ano: 1866 },
+  { titulo: "Crime e Castigo", autor: "Fiódor Dostoiévski", isbn: "9788573266467", ano: 1866 },
   { titulo: "Os Irmãos Karamázov", autor: "Fiódor Dostoiévski", isbn: "9788573265002", ano: 1880 },
   { titulo: "Metamorfose", autor: "Franz Kafka", isbn: "9788535900897", ano: 1915 },
   { titulo: "O Processo", autor: "Franz Kafka", isbn: "9788535912449", ano: 1925 },
@@ -39,11 +39,6 @@ const catalogo = [
   { titulo: "Orgulho e Preconceito", autor: "Jane Austen", isbn: "9788525422897", ano: 1813 },
   { titulo: "O Conde de Monte Cristo", autor: "Alexandre Dumas", isbn: "9788537808931", ano: 1844 }
 ];
-
-const $ = id => document.getElementById(id);
-const form = $("form"), autor = $("autor"), titulo = $("titulo"), isbn = $("isbn");
-const status = $("status"), btnPesquisar = $("btn-pesquisar");
-let timer = null;
 
 // Normaliza texto removendo acentos e espaços
 const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
@@ -90,6 +85,114 @@ function validarIsbn(d) {
   return false;
 }
 
+/* =====================================================================
+   ALGORITMO DE SUGESTÃO ("Você quis dizer")
+   ---------------------------------------------------------------------
+   1. Distância de Damerau-Levenshtein: número mínimo de inserções,
+      remoções, trocas e transposições de letras vizinhas ("casmurro"
+      -> "casmruro" conta 1) para transformar um texto em outro.
+   2. Similaridade = 1 - distância / tamanho do maior texto  (0 a 1).
+   3. Para cada campo preenchido, calcula-se a nota contra o valor
+      correspondente de cada livro:
+        - texto (autor/título): maior entre a similaridade do texto
+          inteiro e a média, por palavra digitada, da melhor
+          similaridade com as palavras do candidato (aceita digitação
+          parcial e palavras fora de ordem). Palavras com menos de
+          3 letras ("de", "da", "o") são ignoradas.
+        - ISBN: similaridade direta dos dígitos.
+   4. Um livro só vira sugestão se TODOS os campos preenchidos passarem
+      do limiar. A nota final é a média das notas dos campos.
+   5. A sugestão corrige apenas os campos que o usuário preencheu;
+      sugestões iguais são agrupadas; mostram-se as 3 melhores.
+   ===================================================================== */
+const LIMIAR_TEXTO = 0.7;
+const LIMIAR_ISBN = 0.8;
+const MAX_SUGESTOES = 3;
+
+function distancia(a, b) {
+  const m = a.length, n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  const d = Array.from({ length: m + 1 }, (_, i) => {
+    const linha = new Array(n + 1).fill(0);
+    linha[0] = i;
+    return linha;
+  });
+  for (let j = 1; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const custo = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + custo);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1); // transposição
+      }
+    }
+  }
+  return d[m][n];
+}
+
+function similaridade(a, b) {
+  const t = Math.max(a.length, b.length);
+  return t ? 1 - distancia(a, b) / t : 1;
+}
+
+function pontuarTexto(consulta, candidato) {
+  const q = norm(consulta), c = norm(candidato);
+  if (c.includes(q)) return 1;
+  const global = similaridade(q, c);
+  const palavrasC = c.split(/\s+/);
+  let palavrasQ = q.split(/\s+/).filter(p => p.length >= 3);
+  if (!palavrasQ.length) palavrasQ = q.split(/\s+/);
+  const porPalavra = palavrasQ.reduce((soma, p) => {
+    const melhor = Math.max(...palavrasC.map(w =>
+      Math.max(similaridade(p, w), similaridade(p, w.slice(0, p.length)))
+    ));
+    return soma + melhor;
+  }, 0) / palavrasQ.length;
+  return Math.max(global, porPalavra);
+}
+
+// Retorna até MAX_SUGESTOES consultas corrigidas: { autor, titulo, isbn, rotulo }
+function sugerir(a, t, i) {
+  const a1 = a.trim(), t1 = t.trim();
+  const melhores = new Map();
+
+  for (const l of catalogo) {
+    const notas = [];
+    if (a1) notas.push([pontuarTexto(a1, l.autor), LIMIAR_TEXTO]);
+    if (t1) notas.push([pontuarTexto(t1, l.titulo), LIMIAR_TEXTO]);
+    if (i)  notas.push([similaridade(i, l.isbn), LIMIAR_ISBN]);
+    if (!notas.length || notas.some(([n, min]) => n < min)) continue;
+
+    const nota = notas.reduce((s, [n]) => s + n, 0) / notas.length;
+    const partes = [];
+    if (t1) partes.push(l.titulo);
+    if (a1) partes.push(l.autor);
+    if (i && !t1) partes.unshift(l.titulo); // só ISBN digitado: mostra também o título
+    if (i)  partes.push("ISBN " + formatarIsbn(l.isbn));
+    const rotulo = partes.join(" · ");
+
+    if (!melhores.has(rotulo) || melhores.get(rotulo).nota < nota) {
+      melhores.set(rotulo, {
+        nota, rotulo,
+        autor: a1 ? l.autor : null,
+        titulo: t1 ? l.titulo : null,
+        isbn: i ? l.isbn : null
+      });
+    }
+  }
+
+  return [...melhores.values()]
+    .sort((x, y) => y.nota - x.nota || x.rotulo.localeCompare(y.rotulo, "pt-BR"))
+    .slice(0, MAX_SUGESTOES);
+}
+
+// ===== INTERFACE =====
+const $ = id => document.getElementById(id);
+const form = $("form"), autor = $("autor"), titulo = $("titulo"), isbn = $("isbn");
+const status = $("status"), btnPesquisar = $("btn-pesquisar");
+let timer = null;
+
 // Restringe caracteres permitidos no campo
 isbn.addEventListener("input", () => {
   isbn.value = isbn.value.replace(/[^0-9xX-]/g, "");
@@ -132,7 +235,11 @@ function validar() {
       "Confira os números na contracapa do livro e tente novamente.";
     $("isbn-erro").hidden = false;
     isbn.setAttribute("aria-invalid", "true");
-    isbn.focus();
+    // Um ISBN digitado errado quase sempre falha no dígito verificador:
+    // aqui também oferecemos "Você quis dizer".
+    const sugestoes = sugerir(a, t, i);
+    if (sugestoes.length) mostrarSugestoes(sugestoes, false);
+    else isbn.focus();
     return false;
   }
   return true;
@@ -167,8 +274,51 @@ function pesquisar(a, t, i) {
   );
 }
 
-function mostrarResultados(lista) {
+// "Você quis dizer: ..." com opção de negação
+function mostrarSugestoes(sugestoes, semResultado = true) {
+  const itens = sugestoes.map((s, idx) => `
+    <li><button type="button" class="sugestao" data-idx="${idx}">${esc(s.rotulo)}</button></li>`).join("");
+  status.innerHTML = `
+    <div class="panel" role="status">
+      ${semResultado ? "<p><strong>Nenhuma obra encontrada.</strong></p>" : ""}
+      <p>Você quis dizer:</p>
+      <ul class="sugestoes">${itens}</ul>
+      <div class="actions"><button type="button" id="btn-nenhuma">Nenhuma dessas</button></div>
+    </div>`;
+
+  status.querySelectorAll(".sugestao").forEach(btn =>
+    btn.addEventListener("click", () => aceitarSugestao(sugestoes[Number(btn.dataset.idx)]))
+  );
+  $("btn-nenhuma").addEventListener("click", recusarSugestoes);
+}
+
+// Aplica a sugestão escolhida nos campos e refaz a busca
+function aceitarSugestao(s) {
+  if (s.autor !== null) autor.value = s.autor;
+  if (s.titulo !== null) titulo.value = s.titulo;
+  if (s.isbn !== null) isbn.value = formatarIsbn(s.isbn);
+  limparErroGeral();
+  limparErroIsbn();
+  executarBusca();
+}
+
+// Nenhuma sugestão serve: limpa o formulário e orienta a digitar de novo
+function recusarSugestoes() {
+  novaConsulta();
+  status.innerHTML = `
+    <div class="panel info" role="status">
+      <p>Tudo bem! Limpamos os campos. Digite novamente o autor, o título ou o ISBN da obra.</p>
+    </div>`;
+  autor.focus();
+}
+
+function mostrarResultados(lista, a, t, i) {
   if (lista.length === 0) {
+    const sugestoes = sugerir(a, t, i);
+    if (sugestoes.length) {
+      mostrarSugestoes(sugestoes);
+      return;
+    }
     status.innerHTML = `
       <div class="panel" role="status">
         <p><strong>Nenhuma obra encontrada.</strong></p>
@@ -204,11 +354,7 @@ function novaConsulta() {
   autor.focus();
 }
 
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  if (timer) return; // Impede submissão duplicada ativa
-  if (!validar()) { status.innerHTML = ""; return; }
-
+function executarBusca() {
   const a = autor.value, t = titulo.value, i = soDigitos(isbn.value);
   btnPesquisar.disabled = true;
   mostrarCarregando();
@@ -217,8 +363,16 @@ form.addEventListener("submit", e => {
   timer = setTimeout(() => {
     timer = null;
     btnPesquisar.disabled = false;
-    mostrarResultados(pesquisar(a, t, i));
+    mostrarResultados(pesquisar(a, t, i), a, t, i);
   }, 1200);
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  if (timer) return; // Impede submissão duplicada ativa
+  status.innerHTML = "";
+  if (!validar()) return;
+  executarBusca();
 });
 
 $("btn-limpar").addEventListener("click", () => {
