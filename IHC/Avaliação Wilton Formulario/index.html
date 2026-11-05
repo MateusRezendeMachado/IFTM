@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de obras</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <h1><center>Consulta de obras</center></h1><br>
+  <i><p class="subtitle">Preencha <b>pelo menos um</b> campo para pesquisar.</p></i>
+
+  <form id="form" novalidate autocomplete="off">
+    <div class="field">
+      <label for="autor">Autor</label>
+      <input id="autor" name="autor" type="text" placeholder="Ex.: Machado de Assis" aria-describedby="erro-geral">
+    </div>
+
+    <div class="field">
+      <label for="titulo">Título</label>
+      <input id="titulo" name="titulo" type="text" placeholder="Ex.: Dom Casmurro">
+    </div>
+
+    <div class="field">
+      <label for="isbn">ISBN <span class="optional">(opcional)</span></label>
+      <input id="isbn" name="isbn" type="text" inputmode="numeric" maxlength="17"
+             placeholder="Ex.: 978-85-359-1166-4" aria-describedby="isbn-hint isbn-erro">
+      <p class="hint" id="isbn-hint">10 ou 13 números. Os hifens são opcionais.</p>
+
+      <details class="help">
+        <summary>O que é ISBN?</summary>
+        <p>
+          O <strong>ISBN</strong> (<em>International Standard Book Number</em>) é um
+          identificador único para livros, com 10 ou 13 dígitos. Costuma aparecer na
+          contracapa, próximo ao código de barras. O último dígito é um
+          <strong>dígito verificador</strong> que permite conferir se o número foi
+          digitado corretamente — é por isso que alguns ISBNs são recusados mesmo
+          tendo o tamanho certo. Pode ser digitado com ou sem hifens.
+        </p>
+      </details>
+
+      <p class="error" id="isbn-erro" role="alert" hidden></p>
+    </div>
+
+    <p class="error" id="erro-geral" role="alert" hidden></p>
+
+    <div class="actions">
+      <button type="submit" class="primary" id="btn-pesquisar">Pesquisar</button>
+      <button type="button" id="btn-limpar">Limpar campos</button>
+    </div>
+  </form>
+
+  <div id="status" aria-live="polite"></div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
